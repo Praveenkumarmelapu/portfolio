@@ -1,0 +1,543 @@
+<style>
+/* *** IMPORTANT FIX FOR ELEMENTOR CSS SCOPING *** */
+.site-wrap, :root{ 
+    --bg:#000;
+    --card:#0b0b0b;
+    --accent:#00b7ff; /* Neon Blue accent */
+    --muted:#9aa6b2;
+    --glass: rgba(255,255,255,0.03);
+    --header-bg-start: rgba(2, 4, 15, 0.85); /* Slightly darker, bluish black */
+    --header-bg-end: rgba(2, 4, 15, 0.7);
+    --radius:14px;
+    --maxw:1100px;
+    --transition:0.28s;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+    margin:0;
+    font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background:linear-gradient(180deg,#000 0%, #060606 100%);
+    color:#e6eef6;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+}
+
+/* Container */
+.site-wrap{max-width:var(--maxw);margin:40px auto;padding:20px}
+
+/* Header - VISIBILITY IMPROVED */
+.site-header{
+    position:sticky;top:12px;z-index:999;
+    backdrop-filter: blur(8px); /* Increased blur for more glass effect */
+    /* Use new, slightly darker gradient for contrast */
+    background:linear-gradient(180deg, var(--header-bg-start), var(--header-bg-end));
+    border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:18px;
+    /* Enhanced shadow for a lifted appearance and accent glow */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.8), 0 0 16px rgba(0,183,255,0.1);
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .logo{
+    width:48px;height:48px;border-radius:10px;overflow:hidden;
+    border:1px solid rgba(0,0,0,0.5);box-shadow:0 6px 18px rgba(0,0,0,0.6);
+}
+.brand .logo img{width:100%;height:100%;object-fit:cover;display:block}
+.brand h1{font-size:18px;margin:0;letter-spacing:0.6px}
+.nav{margin-left:auto;display:flex;gap:10px;align-items:center}
+.nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600;font-size:14px; transition: color var(--transition), background var(--transition), box-shadow var(--transition);}
+.nav a:hover{color:#fff;background:linear-gradient(90deg, rgba(0,183,255,0.08), rgba(0,183,255,0.03));box-shadow:0 6px 18px rgba(0,183,255,0.05)}
+.btn-resume{background:linear-gradient(90deg,var(--accent),#6ee2ff);color:#000;padding:8px 14px;border-radius:10px;font-weight:700}
+
+/* Dropdown Styles for Social Icons */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-btn {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    background: none; 
+    border: none;
+    transition: color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+.dropdown-btn:hover {
+    color: #fff;
+    background: linear-gradient(90deg, rgba(0,183,255,0.08), rgba(0,183,255,0.03));
+    box-shadow: 0 6px 18px rgba(0,183,255,0.05);
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: var(--card); 
+    min-width: 140px;
+    box-shadow: 0 8px 16px 0px rgba(0,0,0,0.5);
+    border-radius: 10px;
+    z-index: 1;
+    padding: 6px 0;
+    border: 1px solid rgba(255,255,255,0.05);
+    right: 0;
+}
+.dropdown-content a {
+    color: var(--muted);
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color var(--transition), background var(--transition);
+}
+.dropdown-content a:hover {
+    background-color: rgba(0,183,255,0.1);
+    color: #fff;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1fr 320px;gap:28px;margin-top:28px;align-items:center}
+.hero-left{padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+.hero-right{display:flex;align-items:center;justify-content:center}
+.h-name{font-size:32px;margin:0 0 8px 0;letter-spacing:0.6px}
+.h-tag{color:var(--muted);font-weight:600;margin-bottom:16px}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap}
+.primary-cta{background:transparent;border:2px solid var(--accent);color:var(--accent);padding:10px 16px;border-radius:12px;font-weight:700;text-decoration:none}
+.secondary-cta{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px 14px;border-radius:12px;text-decoration:none}
+.profile-card{width:260px;padding:18px;border-radius:16px;background:linear-gradient(180deg, rgba(0,183,255,0.04), rgba(0,0,0,0.25));box-shadow:0 12px 32px rgba(0,183,255,0.03)}
+.profile-card img{width:100%;height:260px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+.profile-meta{text-align:center;margin-top:12px}
+.profile-meta h3{margin:0;font-size:18px}
+.profile-meta p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+/* Sections */
+section{margin-top:28px}
+.section-title{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.section-title h2{margin:0;font-size:18px}
+.section-sub{color:var(--muted);font-size:14px}
+
+/* About */
+.about{display:flex;gap:20px;align-items:flex-start}
+.about .card{flex:1;padding:18px;border-radius:12px;background:var(--card);border:1px solid rgba(255,255,255,0.02)}
+
+/* Skills */
+.skills-grid{display:flex;flex-wrap:wrap;gap:10px}
+.skill{padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));font-weight:700;color:var(--muted)}
+
+/* Projects */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.proj{
+    position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    cursor:pointer;border:1px solid rgba(255,255,255,0.03);transition:transform var(--transition),box-shadow var(--transition);
+}
+.proj:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(0,0,0,0.7)}
+.proj img{width:100%;height:160px;object-fit:cover;display:block}
+.proj .meta{padding:12px}
+.proj .meta h3{margin:0 0 6px 0;font-size:16px}
+.proj .meta p{margin:0;color:var(--muted);font-size:13px}
+.proj .overlay{
+    position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.45));
+    display:flex;align-items:flex-end;padding:12px;opacity:0;transition:opacity var(--transition);
+}
+.proj:hover .overlay{opacity:1}
+.proj .overlay .title{color:#fff;font-weight:800;text-shadow:0 6px 18px rgba(0,0,0,0.5)}
+
+
+/* Modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:1200;padding:24px}
+.modal{width:100%;max-width:860px;background:linear-gradient(180deg,#071017, #02060a);border-radius:16px;padding:18px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 60px rgba(2,6,23,0.8)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.modal-body{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:12px}
+/* Style the link inside the modal header */
+.modal-title-link {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s;
+}
+.modal-title-link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+.modal .close{background:transparent;border:0;color:var(--muted);font-weight:800;font-size:18px;cursor:pointer}
+.modal img{width:100%;height:220px;object-fit:cover;border-radius:10px}
+
+/* Contact (CLEANED CSS) */
+.contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:10px; 
+} 
+.input, textarea{
+    padding:10px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.04);
+    background:transparent;
+    color:inherit;
+    width:100%; 
+} 
+textarea{min-height:120px;resize:vertical}
+/* Note: Input row styling is inline in HTML for guaranteed layout */
+
+/* Footer */
+.footer{margin-top:30px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));display:flex;align-items:center;justify-content:space-between}
+
+/* Responsive */
+@media (max-width:900px){
+    .hero{grid-template-columns:1fr}
+    .hero-right{order:-1}
+    .modal-body{grid-template-columns:1fr}
+    .profile-card{width:100%}
+    .nav{display:none}
+}
+@media (max-width:480px){
+    .h-name{font-size:24px}
+}
+
+/* small helpers */
+.muted{color:var(--muted)}
+a.icon{display:inline-flex;align-items:center;gap:8px}
+</style>
+
+<div class="site-wrap">
+
+    <header class="site-header" role="banner">
+    <div class="brand">
+      <div class="logo"><img src="https://i.ibb.co/TMYfgDr8/PIC.jpg" alt="logo"></div>
+      <div>
+        <h1>MELAPU PRAVEEN KUMAR</h1>
+        <div class="muted" style="font-size:12px">Front End  Developer | Designer | Innovator</div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <a class="btn-resume" href="https://qrr.to/6793fae6" download="MELAPU_PRAVEEN_KUMAR_Resume.pdf">Resume</a>
+      
+      <div class="dropdown">
+        <button class="dropdown-btn" aria-expanded="false" aria-controls="social-menu">Socials</button>
+        <div class="dropdown-content" id="social-menu">
+          <a href="https://github.com/Praveenkumarmelapu" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/praveen-kumar-melapu" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://example.com/twitter" target="_blank" rel="noopener">Twitter</a>
+        </div>
+      </div>
+    </nav>
+    </header>
+
+    <section id="home" class="hero" aria-labelledby="home-title">
+    <div class="hero-left">
+      <h2 id="home-title" class="h-name">MELAPU PRAVEEN KUMAR</h2>
+      <div class="h-tag">Front End Developer | Designer | Innovator</div>
+      <p class="muted">I build reliable web applications, embedded IoT solutions and elegant UI experiences. My work ranges from Django-based systems to lightweight embedded systems and PCB design.</p>
+      <div class="cta-row" style="margin-top:14px">
+        <a class="primary-cta" href="#projects">View Projects</a>
+        <a class="secondary-cta" href="#contact">Hire Me</a>
+      </div>
+    </div>
+
+    <aside class="hero-right">
+      <div class="profile-card" aria-hidden="false">
+        <img src="https://i.ibb.co/TMYfgDr8/PIC.jpg" alt="Profile photo placeholder">
+        <div class="profile-meta">
+          <h3>MELAPU PRAVEEN KUMAR</h3>
+          <p class="muted">Front End and Wordpress Developer</p>
+        </div>
+      </div>
+    </aside>
+    </section>
+
+    <section id="about" aria-labelledby="about-title">
+    <div class="section-title"><h2 id="about-title">About</h2><div class="section-sub">Short intro</div></div>
+    <div class="about">
+      <div class="card">
+        <p>Hello — I'm **MELAPU PRAVEEN KUMAR**. I specialize in full-stack web development with Django and front-end technologies, as well as embedded systems and IoT development. I enjoy building practical solutions like library management systems, automation projects and sleek portfolio sites.</p>
+        <p class="muted" style="margin-top:10px">Experience: college projects, hobby IoT builds, and multiple small full-stack applications.</p>
+      </div>
+      <div style="width:320px">
+        <div class="card" style="padding:14px">
+          <h3 style="margin-top:0">Contact</h3>
+          <p class="muted" style="margin:6px 0 0">Email: <a href="mailto:praveenkumarmelapu418@gmail.com" class="muted">example@example.com</a></p>
+          <p class="muted" style="margin:6px 0 0">Mobile: 630442153</p>
+          <p class="muted" style="margin:6px 0 0">Location: India</p>
+          <div style="margin-top:12px">
+            <a class="primary-cta" href="https://qrr.to/6793fae6" download>Download Resume</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <section id="skills" aria-labelledby="skills-title">
+    <div class="section-title"><h2 id="skills-title">Skills</h2><div class="section-sub">Technologies & tools</div></div>
+    <div class="skills-grid">
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">Python</div>
+      <div class="skill">IoT</div>
+      <div class="skill">Embedded Systems</div>
+      <div class="skill">PCB Design</div>
+      <div class="skill">Microcontrollers</div>
+      <div class="skill">MS Office</div>
+    </div>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-title">
+    <div class="section-title"><h2 id="projects-title">Projects</h2><div class="section-sub">Click a project to view details</div></div>
+
+    <div class="projects-grid">
+        <div class="proj" 
+        data-title="College Library Management System" 
+        data-desc="A robust Django-based library management system for colleges with student registration, admin dashboard, borrowing history, late fee calculations and a searchable catalog. Includes role-based access and CSV export."
+        data-img="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder"
+        data-tech="Python • Django • SQLite • HTML/CSS"
+        data-github="https://github.com/Praveenkumarmelapu/-College-Library-Management-System"> <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Library project">
+        <div class="overlay"><div class="title">College Library Management System</div></div>
+        <div class="meta"><h3>College Library Management</h3><p class="muted">Django-based system for libraries.</p></div>
+      </div>
+
+        <div class="proj" 
+        data-title="To-Do List App" 
+        data-desc="A lightweight To-Do app that supports task creation, categorization, deadlines and local storage sync. Clean UI with drag-and-drop reordering and real-time filters."
+        data-img="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder"
+        data-tech="HTML • CSS • Vanilla JS • Local Storage"
+        data-github="https://github.com/Praveenkumarmelapu/To-Do-list-app">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="To-do app">
+        <div class="overlay"><div class="title">To-Do List App</div></div>
+        <div class="meta"><h3>To-Do List App</h3><p class="muted">Task manager with drag-drop.</p></div>
+      </div>
+
+        <div class="proj" 
+        data-title="Weather App" 
+        data-desc="A responsive Weather App that fetches live data from public APIs, shows current conditions, hourly forecast, and uses geolocation for quick access. Lightweight and mobile-friendly."
+        data-img="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder"
+        data-tech="HTML • CSS • JavaScript • OpenWeather API"
+        data-github="https://github.com/Praveenkumarmelapu/weather-app">
+        <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Weather app">
+        <div class="overlay"><div class="title">Weather App</div></div>
+        <div class="meta"><h3>Weather App</h3><p class="muted">Live weather & forecast.</p></div>
+      </div>
+
+        <div class="proj" 
+        data-title="Portfolio Website" 
+        data-desc="A showcase of responsive design and interactive elements, built to highlight core skills."
+        data-img="https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder"
+        data-tech="HTML • CSS • JavaScript (Vanilla)"
+        data-github="https://example.com/portfolio-placeholder">
+        <img src="https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Portfolio">
+        <div class="overlay"><div class="title">Portfolio Website</div></div>
+        <div class="meta"><h3>Portfolio</h3><p class="muted">Personal showcase site.</p></div>
+      </div>
+
+        <div class="proj" 
+        data-title="Bluetooth Controlled Car" 
+        data-desc="An embedded systems project: a Bluetooth-controlled car using an ESP32 microcontroller, motor drivers, mobile control app, and compact PCB. Demonstrates hardware + software integration."
+        data-img="https://images.unsplash.com/photo-1504215680853-026ed2a45def?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder"
+        data-tech="Microcontroller (ESP32) • Bluetooth LE • C/C++ • PCB Design"
+        data-github="https://github.com/Praveenkumarmelapu/Bluetooth-control-car-using-ESP-32">
+        <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Bluetooth car">
+        <div class="overlay"><div class="title">Bluetooth Controlled Car</div></div>
+        <div class="meta"><h3>Bluetooth Car</h3><p class="muted">Microcontroller + motors.</p></div>
+      </div>
+    </div>
+    </section>
+
+    <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document">
+      <div class="modal-header">
+        <div>
+          <a id="modalTitleLink" href="#" class="modal-title-link" target="_blank">
+            <strong id="modalTitle">Project Title</strong>
+          </a>
+          <div id="modalSubtitle" class="muted" style="font-size:13px">Click title to open GitHub</div>
+        </div>
+        <button class="close" id="modalClose" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <img id="modalImg" src="" alt="project image">
+          <p id="modalDesc" style="margin-top:12px;color:var(--muted)"></p>
+        </div>
+        <aside style="width:320px">
+          <div style="padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(255,255,255,0.02)">
+            <h4 style="margin-top:0">Project Details</h4>
+            <p class="muted" id="modalExtra">Tech: HTML • CSS • Python • IoT</p>
+            <div style="margin-top:14px">
+              <button class="primary-cta" id="viewLive" onclick="openProjectLink()">Open</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+    </div>
+
+    <section id="contact" aria-labelledby="contact-title">
+    <div class="section-title"><h2 id="contact-title">Contact</h2><div class="section-sub">Say hi or request my resume</div></div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap">
+      <form class="card" style="flex:1;min-width:280px" onsubmit="event.preventDefault();alert('Thanks — form send simulated (Elementor forms recommended for production).')">
+        
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px;"> 
+          <input class="input" placeholder="Your name" required style="flex: 1; min-width: 140px;">
+          <input class="input" placeholder="Email" required style="flex: 1; min-width: 140px;">
+        </div>
+        
+        <div class="full-width">
+          <textarea placeholder="Message" required></textarea>
+        </div>
+        
+        <div style="margin-top:10px">
+          <button class="primary-cta" type="submit">Send Message</button>
+        </div>
+      </form>
+
+      <div style="width:320px">
+        <div class="card">
+          <h4 style="margin-top:0">Quick Info</h4>
+          <p class="muted" style="margin-bottom:10px">Email: <a href="mailto:example@example.com" class="muted">example@example.com</a></p>
+          <p class="muted">You can replace the contact form with Elementor's Form widget to receive real messages.</p>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <footer class="footer">
+    <div class="muted">© <strong>MELAPU PRAVEEN KUMAR</strong> — Built with ❤️</div>
+    <div class="muted">Made with Neon Blue accents</div>
+    </footer>
+</div>
+
+<script>
+    // Global variable to hold the link until the button is clicked
+    let currentGitHubUrl = '#'; 
+
+    // Function executed when the 'Open' button is clicked
+    function openProjectLink() {
+        // This is the direct JavaScript bypass for browser link security
+        if (currentGitHubUrl && currentGitHubUrl !== '#') {
+            window.open(currentGitHubUrl, '_blank');
+        }
+    }
+
+    // JavaScript for dropdown functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const dropdownBtn = document.querySelector('.dropdown-btn');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        if (dropdownBtn && dropdownContent) {
+            dropdownBtn.addEventListener('click', () => {
+                const isExpanded = dropdownBtn.getAttribute('aria-expanded') === 'true' || false;
+                dropdownBtn.setAttribute('aria-expanded', !isExpanded);
+                dropdownContent.style.display = isExpanded ? 'none' : 'block';
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
+                    dropdownBtn.setAttribute('aria-expanded', 'false');
+                    dropdownContent.style.display = 'none';
+                }
+            });
+        }
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+            const id = this.getAttribute('href');
+            if(id.length>1){
+                e.preventDefault();
+                const el = document.querySelector(id);
+                if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+            }
+        })
+    });
+
+    // Project modal logic - Opens modal and sets button link
+    const projects = document.querySelectorAll('.proj'); 
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalTitleLink = document.getElementById('modalTitleLink'); 
+    const modalDesc = document.getElementById('modalDesc');
+    const modalImg = document.getElementById('modalImg');
+    const modalExtra = document.getElementById('modalExtra');
+    const viewLive = document.getElementById('viewLive'); // Target the 'Open' button
+    const modalClose = document.getElementById('modalClose');
+
+    projects.forEach(p=>{
+        p.addEventListener('click', ()=>{
+            const title = p.dataset.title || '';
+            const desc = p.dataset.desc || '';
+            const img = p.dataset.img || '';
+            const tech = p.dataset.tech || 'HTML • CSS • Python';
+            const githubUrl = p.dataset.github || '#'; // Get the GitHub URL
+
+            // 1. SET MODAL CONTENT
+            modalTitle.textContent = title;
+            modalDesc.textContent = desc;
+            modalImg.src = img;
+            modalImg.alt = title;
+            modalExtra.textContent = 'Technologies: ' + tech;
+
+            // CRITICAL STEP: Store link globally for the button's JS function
+            currentGitHubUrl = githubUrl; 
+
+            // 2. VISUALLY ENABLE/DISABLE LINKS
+            const isLinkValid = (githubUrl && githubUrl !== '#');
+
+            // Modal Title Link
+            modalTitleLink.href = githubUrl; 
+            modalTitleLink.style.pointerEvents = isLinkValid ? 'auto' : 'none';
+            modalTitleLink.style.opacity = isLinkValid ? '1' : '0.5';
+            
+            // Modal Button
+            viewLive.textContent = isLinkValid ? 'Open' : 'Link (N/A)';
+            viewLive.style.opacity = isLinkValid ? '1' : '0.5';
+            viewLive.style.pointerEvents = isLinkValid ? 'auto' : 'none';
+
+            // 3. DISPLAY MODAL
+            modalBackdrop.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            modalBackdrop.setAttribute('aria-hidden','false');
+        });
+    });
+
+
+    function closeModal(){
+        modalBackdrop.style.display = 'none';
+        modalBackdrop.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', (e)=>{
+        if(e.target === modalBackdrop) closeModal();
+    });
+
+    document.addEventListener('keydown',(e)=>{ if(e.key === 'Escape') closeModal(); });
+
+    // Tiny active nav highlight based on scroll
+    const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+    const sections = Array.from(navLinks).map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    function onScroll(){
+        const pos = window.scrollY + 120;
+        let current = null;
+        sections.forEach(s=>{
+            if(s.offsetTop <= pos) current = s;
+        });
+        navLinks.forEach(a=>{
+            a.style.color = 'var(--muted)';
+            if(current && a.getAttribute('href') === '#' + current.id) a.style.color = '#fff';
+        })
+    }
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+</script>
