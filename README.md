@@ -18,7 +18,7 @@ It features a clean design, smooth animations, and easy navigation — serving a
   
 
 ## 🔗 Live Demo  
-👉 [View Portfolio]### 
+👉 [View Portfolio](https://praveenkumarmelapu.github.io/portfolio/ ) 
 
 ## 📬 Contact  
 📧 your.praveenkumarmelapu418@gmail.com 
