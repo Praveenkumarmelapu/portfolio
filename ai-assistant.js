@@ -215,7 +215,7 @@ If you don't know the answer, politely redirect them to his contact details.`
             }
         ],
         "resume": {
-            "download_url": "https://drive.google.com/file/d/1oXNE-U73fhozkWpNoHTS_vYXqbWj23Ed/view?usp=drive_link"
+            "download_url": "https://drive.google.com/file/d/1oXNE-U73fhozkWpNoHTS_vYXqbWj23Ed/view?usp=sharing"
         },
         "contact": {
             "email": "praveenkumarmelapu418@gmail.com",
