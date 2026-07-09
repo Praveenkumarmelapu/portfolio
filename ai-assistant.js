@@ -1131,7 +1131,7 @@ If you don't know the answer, politely redirect them to his contact details.`
         }
 
         // Default fallback
-        return `I'm not sure how to answer that yet. I'd be happy to answer questions about Praveen's projects, skills, experience, education, or help you connect with him.`;
+        return "I'm designed to assist visitors with Praveen's portfolio, projects, skills, education, and professional background. I may not be able to answer unrelated topics, but I'd be happy to help you learn more about Praveen.";
     }
 
     // Tech explanation mappings
