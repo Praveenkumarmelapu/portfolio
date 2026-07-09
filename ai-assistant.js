@@ -643,6 +643,20 @@ If you don't know the answer, politely redirect them to his contact details.`
         return '';
     }
 
+    // Returns a random ChatGPT/Gemini-like conversational starter to make replies natural
+    function getRandomTransition() {
+        const transitions = [
+            "I'd be happy to tell you about that! ",
+            "That's a great question. ",
+            "Absolutely! Let's explore the details. ",
+            "I can certainly help you with that. ",
+            "Praveen has built some interesting experience in that area. ",
+            "Sure, here is what you need to know: ",
+            "I'd be glad to share these details with you. "
+        ];
+        return transitions[Math.floor(Math.random() * transitions.length)];
+    }
+
     function getFollowupsHtml() {
         return `
         <div class="ai-followups">
@@ -744,6 +758,30 @@ If you don't know the answer, politely redirect them to his contact details.`
     // Smart Local Category Routing Engine
     function getIntelligentLocalResponse(message) {
         const rawMsg = message.toLowerCase();
+
+        // --- SPECIFIC INTENT OVERRIDES (EXACT ANSWERS LIKE REAL LLM) ---
+        if (rawMsg.includes('where is he from') || rawMsg.includes('where does he live') || rawMsg.includes('location') || rawMsg.includes('address') || rawMsg.includes('live in') || rawMsg.includes('based in')) {
+            return `Praveen resides in the beautiful coastal city of **Visakhapatnam, Andhra Pradesh, India**. 📍`;
+        }
+        if (rawMsg.includes('full name') || rawMsg.includes('what is his name')) {
+            return `His full name is **Melapu Praveen Kumar**.`;
+        }
+        if (rawMsg.includes('what does he do') || rawMsg.includes('what is his job') || rawMsg.includes('his role') || rawMsg.includes('occupation')) {
+            return `Praveen is an **Electronics and Communication Engineering (ECE) graduate** who works as a **Web & WordPress Developer**. He is highly skilled in Python Django, React frontend layout styling, and hardware IoT prototyping.`;
+        }
+        if (rawMsg.includes('certificates links') || rawMsg.includes('drive links') || rawMsg.includes('certificate drive')) {
+            return `Here are the direct Google Drive folders to check out his verified certificates:
+            <br>• <a href="https://drive.google.com/file/d/1jttcbrF5rRLlCRInuT2sfMtj2MudWXp-/view?usp=drive_link" target="_blank">AI/ML Intern (EDU SKILLS)</a>
+            <br>• <a href="https://drive.google.com/file/d/1oFHwssi7KyA4lG6F7Ir_uL3YKoUzHK2p/view?usp=drive_link" target="_blank">Web Development Intern (APSSDC)</a>
+            <br>• <a href="https://drive.google.com/file/d/1xeyMvVXGvZp4xzbeVu-ziO4KP7D_OH3O/view?usp=drive_link" target="_blank">Embedded & IoT Intern (Demy Software Solutions)</a>`;
+        }
+        if (rawMsg.includes('who is praveen') || rawMsg.includes('who is the creator') || rawMsg.includes('creator of this portfolio') || rawMsg.includes('owner of this site')) {
+            lastIntent = 'about';
+            return getCategoryResponse('about', rawMsg);
+        }
+        if (rawMsg.includes('what is this website') || rawMsg.includes('what is this app') || rawMsg.includes('what does this site do')) {
+            return `This is Melapu Praveen Kumar's Personal Portfolio website, designed to showcase his technical skills, full-stack projects, and internship credentials. You can chat with me, his AI assistant, to easily navigate the layout and download his resume!`;
+        }
 
         // --- DIRECT OVERRIDES FOR NAVIGATIONAL & ACTION PATTERNS ---
         if (rawMsg.includes('go to about') || rawMsg.includes('show about') || rawMsg.includes('navigate to about')) {
@@ -971,7 +1009,11 @@ If you don't know the answer, politely redirect them to his contact details.`
 
         if (bestCategory && maxScore > 0) {
             lastIntent = bestCategory;
-            return getNamePrefix() + getCategoryResponse(bestCategory, rawMsg);
+            let prefix = getNamePrefix();
+            if (!prefix && ['about', 'skills', 'projects', 'experience', 'education', 'certifications', 'resume', 'contact', 'services'].includes(bestCategory)) {
+                prefix = getRandomTransition();
+            }
+            return prefix + getCategoryResponse(bestCategory, rawMsg);
         }
 
         // Default fallback
@@ -1006,47 +1048,51 @@ If you don't know the answer, politely redirect them to his contact details.`
 
         switch (category) {
             case 'about':
-                return `Praveen Kumar is a B.Tech graduate in Electronics and Communication Engineering with a strong passion for web development. He enjoys building modern, responsive, and user-friendly web applications using contemporary web technologies and AI-assisted development tools. He is continuously improving his technical expertise by working on practical projects and exploring emerging technologies to create scalable and impactful digital solutions.` + tail;
+                return `<strong>Melapu Praveen Kumar</strong> is a dedicated Web Developer and a B.Tech graduate in Electronics and Communication Engineering (ECE), Class of 2026. 
+                <br><br>He has a deep passion for constructing clean, interactive, and responsive web platforms. By combining his engineering analytical thinking with modern frameworks, Praveen designs software pipelines that solve real-world problems. He actively works with tools like <strong>React, Python Django, and WordPress</strong>, and integrates AI assistance in his development flows to optimize visual and code outcomes.` + tail;
             
             case 'skills':
-                return `Praveen has expertise in the following areas:
-                <br><br>• <strong>Frontend Development:</strong> Building clean, responsive, and interactive interfaces using HTML5, CSS3, and JavaScript.
-                <br>• <strong>Full-Stack & Backend (Django/Python):</strong> Developing secure server logic, routing, database integrations (SQLite, MongoDB), and full-stack Django pipelines.
-                <br>• <strong>WordPress Development:</strong> Designing pages, plugin installations, and custom adjustments for clients.
-                <br>• <strong>Embedded & IoT:</strong> Developing systems using Arduino and ESP32 microcontroller boards, sensors interfacing, and PCB logic.` + tail;
+                return `Praveen has a technical skillset bridging software engineering and hardware IoT development:
+                <br><br>• <strong>Frontend Technologies:</strong> Highly proficient in HTML5, CSS3, JavaScript (ES6+), and Tailwind CSS for designing fluid, responsive user interfaces. He has practical experience building component modules in React.
+                <br>• <strong>Backend & Databases:</strong> Proficient in Python and Django for developing secure server routing, databases (SQLite, MongoDB), and REST APIs.
+                <br>• <strong>CMS & Custom Styling:</strong> Designing layouts, modifying block elements, and custom configurations on WordPress.
+                <br>• <strong>IoT & Embedded Systems:</strong> Hands-on experience designing circuits, PCB schematics, wireless telemetry, and writing firmware for ESP32 and Arduino Uno microcontrollers.` + tail;
 
             case 'projects':
-                // rawMsg is passed as a parameter now
                 if (rawMsg.includes('best') || rawMsg.includes('latest') || rawMsg.includes('favorite') || rawMsg.includes('most')) {
-                    return `Praveen's latest and most advanced projects are the <strong>Restaurant POS System</strong> (React, Node.js, SQL QR ordering menu system) and the <strong>Online Snacks Store</strong> (React & Django e-commerce platform). Both support full database integrations.` + tail;
+                    return `Praveen's latest and most advanced projects are the <strong>Restaurant POS System</strong> and the <strong>Online Snacks Store</strong>. Both showcase complete full-stack integration, secure authentication, and database routing.` + tail;
                 }
-                let projHtml = `Here are Praveen's portfolio projects:
-                <br><br>1. <strong>Restaurant POS System (2026):</strong> A React & Node.js QR-code menu and ordering program.
-                <br>2. <strong>Online Snacks Store (2026):</strong> E-commerce utilizing React frontend and Django backend.
-                <br>3. <strong>Food Delivery App (2025):</strong> Frontend ordering interface.
-                <br>4. <strong>To-Do List App (2025):</strong> Task organizer using Local Storage.
-                <br>5. <strong>Library System (2025):</strong> Django-powered admin book issue controls.
-                <br>6. <strong>Weather Web App (2025):</strong> Django weather fetcher.
-                <br>7. <strong>Tic Tac Toe (2025):</strong> Sleek classic grid game using Vanilla JS.`;
+                let projHtml = `Praveen has developed a range of web applications and system prototypes:
+                <br><br>1. <strong>Restaurant POS System (2026):</strong> A React & Node.js QR-code based menu and table ordering ecosystem. [React, Node.js, SQL]
+                <br>2. <strong>Online Snacks Store (2026):</strong> A responsive e-commerce web app featuring user sessions, shopping cart actions, and item search. [React, Django, SQLite]
+                <br>3. <strong>Online Food Delivery App (2025):</strong> A clean, fluid landing interface for checking out food menus. [HTML, CSS, JS]
+                <br>4. <strong>To-Do List App (2025):</strong> A task organizer panel utilizing browser Local Storage for persistent lists. [HTML, CSS, JS]
+                <br>5. <strong>College Library Management System (2025):</strong> A Django dashboard with student logs, book tracking, and penalty calculations. [Django, SQLite]
+                <br>6. <strong>Weather Web App (2025):</strong> Real-time weather search and lookup maps using Django backend handlers. [Django, Python]
+                <br>7. <strong>Tic-Tac-Toe (2025):</strong> Classic responsive grid game. [Vanilla JavaScript]`;
                 return projHtml + tail;
 
             case 'experience':
-                return `Praveen has gained engineering experience through these internships:
-                <br><br>• <strong>AI/ML Intern</strong> at <em>EDU SKILLS</em> (Jul – Sep 2025): Worked on data prep, model scoring with Python, NumPy, Pandas.
-                <br>• <strong>Web Dev Intern</strong> at <em>APSSDC</em> (Apr – Jun 2025): Full-stack integrations using Django.
-                <br>• <strong>Embedded Systems Intern</strong> at <em>Demy Software Solutions</em> (Jun – Jul 2024): ESP32 prototyping & sensors.` + tail;
+                return `Praveen has gained practical, hands-on software and hardware experience through three structured internships:
+                <br><br>• <strong>AI/ML Intern</strong> at <em>EDU SKILLS</em> (Jul – Sep 2025): Worked on data preparation steps, model evaluations, and script calculations using Python packages (NumPy, Pandas).
+                <br>• <strong>Web Development Intern</strong> at <em>APSSDC</em> (Apr – Jun 2025): Focused on full-stack web applications, routing modules, and database structures using Python Django.
+                <br>• <strong>Embedded Systems & IoT Intern</strong> at <em>Demy Software Solutions</em> (Jun – Jul 2024): Interfaced wireless sensors, designed PCB schematics, and wrote microcontroller firmware for ESP32 and Arduino Uno boards.` + tail;
 
             case 'education':
-                return `Praveen's academic credentials include:
-                <br><br>• <strong>B.Tech in ECE</strong> (2022 - 2026) at Nadimpalli Satyanarayana Raju Institute of Engineering & Technology (NSRIT). Grade: <strong>7.5 CGPA</strong>.
-                <br>• <strong>Intermediate MPC</strong> (2020 - 2022) at Narayana Junior College. Grade: <strong>64%</strong>.
-                <br>• <strong>Secondary School Certificate</strong> (2019 - 2020) at Swethachalapathi Samasthanam E.M School. Grade: <strong>88.66%</strong>.` + tail;
+                return `Praveen's academic background displays a strong foundation in science and engineering:
+                <br><br>• <strong>B.Tech in Electronics and Communication Engineering (ECE)</strong>
+                <br>Nadimpalli Satyanarayana Raju Institute of Engineering & Technology (NSRIT) | <em>2022 - 2026</em> (Grade: <strong>7.5 CGPA</strong>)
+                <br><br>• <strong>Intermediate Education (MPC)</strong>
+                <br>Narayana Junior College | <em>2020 - 2022</em> (Score: <strong>64%</strong>)
+                <br><br>• <strong>Secondary School Certificate (SSC)</strong>
+                <br>Swethachalapathi Samasthanam E.M School | <em>2019 - 2020</em> (Score: <strong>88.66%</strong>)` + tail;
 
             case 'certifications':
-                return `Praveen holds recognized credentials:
-                <br><br>• <strong>AI/ML Internship:</strong> Certified by EDU SKILLS (2025) in ML pipelines.
-                <br>• <strong>Web Development:</strong> Certified by APSSDC (2025) in Django.
-                <br>• <strong>Embedded Systems:</strong> Certified by Demy Software Solutions (2024) in microcontroller operations.` + tail;
+                return `Praveen holds verified credentials validating his technical learning:
+                <br><br>• <strong>AI/ML Internship Certification</strong> (2025, EDU SKILLS) – Machine learning models, data preprocess algorithms.
+                <br>• <strong>Web Development Certification</strong> (2025, APSSDC) – Python Django structures, databases.
+                <br>• <strong>Embedded Systems Certification</strong> (2024, Demy Software Solutions) – Microcontrollers, sensors interfacing.
+                <br><br><em>Note: You can preview or access all Drive certificate links directly through my contact action button or from the resume panel.</em>` + tail;
 
             case 'resume':
                 return `I'd be happy to help. How would you like to access Praveen's resume?
@@ -1064,12 +1110,13 @@ If you don't know the answer, politely redirect them to his contact details.`
                 <button class="ai-action-btn" onclick="AIAssistant.triggerContact('github')">🐙 GitHub</button>` + tail;
 
             case 'services':
-                return `Praveen is open for freelance projects, internships, and hiring opportunities. What he offers:
-                <br><br>• <strong>Frontend Development:</strong> Building clean, responsive UIs with HTML/CSS/JS.
-                <br>• <strong>Django Full-Stack:</strong> Developing scalable web systems.
-                <br>• <strong>WordPress Customization:</strong> Professional setup and page layout design.
-                <br>• <strong>IoT Prototypes:</strong> Developing Arduino & ESP32 setups.
-                <br><br>Praveen is actively looking for new opportunities. Send him an email at <a href="mailto:${knowledgeBase.contact.email}">${knowledgeBase.contact.email}</a> to connect!` + tail;
+                return `Praveen provides professional design and development services for modern digital solutions:
+                <br><br>✔ <strong>Portfolio & Business Websites:</strong> Custom glassmorphic designs and clean animations to highlight branding.
+                <br>✔ <strong>Landing Pages:</strong> High-speed, mobile-responsive, and SEO-compliant landing interfaces.
+                <br>✔ <strong>Django Full-Stack Applications:</strong> Dynamic database-driven web platforms, secure user portals, and APIs.
+                <br>✔ <strong>WordPress Themes & Configs:</strong> Professional CMS setup, page builders, and custom style adaptations.
+                <br>✔ <strong>IoT Prototypes:</strong> Customized smart sensor automation pipelines using ESP32/Arduino boards.
+                <br><br>If you would like to collaborate or hire him for a project, send an email to <a href="mailto:${knowledgeBase.contact.email}">${knowledgeBase.contact.email}</a>!` + tail;
 
             case 'recruiter':
                 if (rawMsg.includes('why') || rawMsg.includes('hire') || rawMsg.includes('unique')) {
