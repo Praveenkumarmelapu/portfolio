@@ -365,11 +365,9 @@ If you don't know the answer, politely redirect them to his contact details.`
         let tooltipDismissed = false;
 
         // Show tooltip immediately after load if not dismissed
-        setTimeout(() => {
-            if (tooltip && chatPanel && !chatPanel.classList.contains('active') && !tooltipDismissed) {
-                tooltip.classList.add('show');
-            }
-        }, 100);
+        if (tooltip && chatPanel && !chatPanel.classList.contains('active') && !tooltipDismissed) {
+            tooltip.classList.add('show');
+        }
 
         // Click tooltip to open chat
         if (tooltip) {
@@ -2002,9 +2000,5 @@ If you don't know the answer, politely redirect them to his contact details.`
         return html;
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAssistant);
-    } else {
-        initAssistant();
-    }
+    initAssistant();
 })();
