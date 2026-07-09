@@ -853,6 +853,50 @@ If you don't know the answer, politely redirect them to his contact details.`
             return `This is Melapu Praveen Kumar's Personal Portfolio website, designed to showcase his technical skills, full-stack projects, and internship credentials. You can chat with me, his AI assistant, to easily navigate the layout and download his resume!`;
         }
 
+        // --- SPECIFIC INTENT OVERRIDES (EXACT ANSWERS FOR GENERAL QUESTIONS) ---
+        if (rawMsg.includes('nsrit') || rawMsg.includes('satyanarayana raju')) {
+            return `Praveen pursued his **B.Tech in Electronics and Communication Engineering (ECE)** at **Nadimpalli Satyanarayana Raju Institute of Technology (NSRIT)** in Visakhapatnam, India. He studied there from 2022 to 2026, graduating with a **7.5 CGPA**.`;
+        }
+        if (rawMsg.includes('apssdc') || rawMsg.includes('skill development')) {
+            return `Praveen worked as a **Web Development Intern** at **APSSDC (Andhra Pradesh State Skill Development Corporation)** from April to June 2025. During this tenure, he gained full-stack development experience, implementing database routing and templates using Python Django.`;
+        }
+        if (rawMsg.includes('demy') || rawMsg.includes('software solutions')) {
+            return `Praveen completed his **Embedded Systems Internship** at **Demy Software Solutions** (June – July 2024), where he programmed firmware logs, interfacing sensors, and setting up wireless telemetry on **ESP32 and Arduino Uno** boards.`;
+        }
+        if (rawMsg.includes('edu skills') || rawMsg.includes('eduskills')) {
+            return `Praveen was an **AI/ML Intern** certified by **EDU SKILLS** (July – September 2025). He worked on data preprocessing pipelines, model scoring, and calculations using Python libraries like NumPy and Pandas.`;
+        }
+        if (rawMsg.includes('graduation') || rawMsg.includes('graduate') || rawMsg.includes('cgpa') || rawMsg.includes('marks') || rawMsg.includes('gpa') || rawMsg.includes('percentage')) {
+            return `Praveen is an ECE B.Tech graduate of 2026 from NSRIT with a **7.5 CGPA**. Previously, he achieved **64%** in MPC Intermediate at Narayana Junior College and **88.66%** in his Secondary School Certificate (SSC) at Swethachalapathi Samasthanam School.`;
+        }
+        if (rawMsg.includes('snacks store') || rawMsg.includes('snacks website') || rawMsg.includes('ecommerce store') || rawMsg.includes('online snacks')) {
+            lastIntent = 'projects';
+            return `The **Online Snacks Store (2026)** is a major full-stack e-commerce project designed by Praveen. It has a React frontend, Python Django backend, SQLite database integration, shopping cart systems, and session logins.
+            <br><br>
+            <button class="ai-action-btn" onclick="AIAssistant.triggerProject(1, 'demo')">🚀 Live Demo</button>
+            <button class="ai-action-btn" onclick="AIAssistant.triggerProject(1, 'github')">💻 GitHub Code</button>`;
+        }
+        if (rawMsg.includes('restaurant pos') || rawMsg.includes('pos system') || rawMsg.includes('quickserve') || rawMsg.includes('qr-based')) {
+            lastIntent = 'projects';
+            return `The **Restaurant POS System (2026)** is an advanced web application built with React, Node.js, and SQL. It allows customers to scan table QR codes, browse food menus, and place orders directly in real-time.
+            <br><br>
+            <button class="ai-action-btn" onclick="AIAssistant.triggerProject(0, 'demo')">🚀 Live Demo</button>
+            <button class="ai-action-btn" onclick="AIAssistant.triggerProject(0, 'github')">💻 GitHub Code</button>`;
+        }
+        if (rawMsg.includes('arduino') || rawMsg.includes('esp32') || rawMsg.includes('microcontroller') || rawMsg.includes('iot') || rawMsg.includes('pcb') || rawMsg.includes('hardware')) {
+            lastIntent = 'skills';
+            return `Due to his ECE engineering background, Praveen is highly competent in hardware prototyping! He has designed PCB circuits, integrated sensor nodes, and written firmware for ESP32 and Arduino boards.`;
+        }
+        if (rawMsg.includes('who are you') || rawMsg.includes('your name') || rawMsg.includes('are you human') || rawMsg.includes('what are you') || rawMsg.includes('introduce yourself')) {
+            return `I am Praveen's AI Portfolio Assistant, built to help you interactively check out his portfolio, full-stack projects, and resume. Think of me as a ChatGPT tailored just for Praveen! 😊`;
+        }
+        if (rawMsg.includes('meaning of life') || rawMsg.includes('deep question') || rawMsg.includes('why exist')) {
+            return `To seek knowledge, compile bug-free code, and help visitors connect with talented developers like Praveen! 🧠`;
+        }
+        if (rawMsg.includes('system prompt') || rawMsg.includes('instructions') || rawMsg.includes('rules')) {
+            return `My system instructions are to act as a professional, friendly, and helpful AI assistant for Praveen's portfolio, answering inquiries about his web development, WordPress, and IoT background.`;
+        }
+
         // --- DIRECT OVERRIDES FOR NAVIGATIONAL & ACTION PATTERNS ---
         if (rawMsg.includes('go to about') || rawMsg.includes('show about') || rawMsg.includes('navigate to about')) {
             scrollToSection('about');
