@@ -1,0 +1,220 @@
+{
+  "about": {
+    "summary": "I am Melapu Praveen Kumar, a B.Tech student in Electronics and Communication Engineering (ECE) at Nadimpalli Satyanarayana Raju Institute of Engineering & Technology (NSRIT) graduating in 2026. I have a strong passion for web development and modern digital technologies, building responsive, user-friendly, and performance-driven websites and web applications. I leverage AI-powered tools to optimize development and deliver high-quality, professional solutions.",
+    "role": "Web Developer & WordPress Developer",
+    "location": "India",
+    "graduation_year": "2026",
+    "key_attributes": [
+      "Responsive Frontend Design",
+      "Full-Stack Web Development (Django, Python)",
+      "WordPress Site Customization",
+      "IoT & Embedded Systems Prototyping"
+    ]
+  },
+  "skills": {
+    "web_development": [
+      { "name": "HTML5", "level": "90%" },
+      { "name": "CSS3", "level": "90%" },
+      { "name": "JavaScript", "level": "Learning/Intermedate" },
+      { "name": "WordPress", "level": "80%" },
+      { "name": "Stitch (UI/UX)", "level": "80%" }
+    ],
+    "programming_languages": [
+      { "name": "Python", "level": "50%" }
+    ],
+    "embedded_and_iot": [
+      { "name": "Arduino Uno", "level": "85%" },
+      { "name": "ESP32", "level": "80%" },
+      { "name": "Sensors Interfacing", "level": "80%" },
+      { "name": "PCB Design", "level": "80%" }
+    ],
+    "tools_and_databases": [
+      { "name": "GitHub", "level": "85%" },
+      { "name": "VS Code", "level": "90%" },
+      { "name": "MongoDB", "level": "70%" },
+      { "name": "Antigravity", "level": "90%" },
+      { "name": "Firebase", "level": "80%" },
+      { "name": "Supabase", "level": "80%" },
+      { "name": "Cursor AI", "level": "80%" },
+      { "name": "ChatGPT", "level": "90%" }
+    ],
+    "soft_skills": [
+      "Communication",
+      "Teamwork",
+      "Problem Solving",
+      "Analytical Thinking",
+      "Adaptability"
+    ]
+  },
+  "projects": [
+    {
+      "title": "Restaurant POS System",
+      "subtitle": "QR-Based Ordering System",
+      "year": "2026",
+      "technologies": ["React", "Node.js", "SQL"],
+      "description": "A modern QR-code based ordering and restaurant Point of Sale (POS) system that streamlines the dining experience by allowing customers to scan, browse menus, and place orders directly from their tables.",
+      "github": "https://github.com/Praveenkumarmelapu/Quickserver-QRcode-order-system-",
+      "live_demo": "https://quickserve-qr-order.vercel.app/"
+    },
+    {
+      "title": "Online Snacks Store",
+      "subtitle": "E-Commerce Application",
+      "year": "2026",
+      "technologies": ["React", "Django", "SQLite"],
+      "description": "An interactive e-commerce platform for snacks featuring a user-friendly frontend built with React and a robust backend powered by Django and SQLite, complete with user authentication and cart management.",
+      "github": "https://github.com/Praveenkumarmelapu/online-store",
+      "live_demo": "https://snackstore-frontend.onrender.com/"
+    },
+    {
+      "title": "Online Food Delivery App",
+      "subtitle": "Web Application",
+      "year": "2025",
+      "technologies": ["HTML5", "CSS3", "JavaScript"],
+      "description": "A responsive food delivery platform allowing users to browse menus, add items to cart, and experience a seamless, interactive food ordering user interface.",
+      "github": "https://github.com/Praveenkumarmelapu/Food-Delivery-APP/",
+      "live_demo": "https://praveenkumarmelapu.github.io/Food-Delivery-APP/"
+    },
+    {
+      "title": "To-Do List App",
+      "subtitle": "Web Application",
+      "year": "2025",
+      "technologies": ["HTML5", "CSS3", "JavaScript", "Local Storage"],
+      "description": "A clean and efficient task management application designed with a responsive UI to organize tasks, track progress, and persist user data locally using browser Local Storage.",
+      "github": "https://github.com/Praveenkumarmelapu/To-Do-list-app/",
+      "live_demo": "https://praveenkumarmelapu.github.io/To-Do-list-app/"
+    },
+    {
+      "title": "College Library Management System",
+      "subtitle": "Web Application",
+      "year": "2025",
+      "technologies": ["HTML5", "CSS3", "Django", "SQLite"],
+      "description": "A Django-powered library management system featuring student logins, automated book issue and return operations, admin controls, and late fee tracking to streamline library administration.",
+      "github": "https://github.com/Praveenkumarmelapu/-College-Library-Management-System",
+      "live_demo": null
+    },
+    {
+      "title": "Weather Web App",
+      "subtitle": "Web Application",
+      "year": "2025",
+      "technologies": ["HTML5", "CSS3", "Django"],
+      "description": "A clean and responsive weather forecasting web application integrated with Python Django that retrieves and displays real-time weather information based on city searches.",
+      "github": "https://github.com/Praveenkumarmelapu/weather-app",
+      "live_demo": null
+    },
+    {
+      "title": "Tic Tac Toe",
+      "subtitle": "Interactive Game",
+      "year": "2025",
+      "technologies": ["HTML5", "CSS3", "JavaScript"],
+      "description": "An interactive, fully responsive classic Tic Tac Toe game built using pure JavaScript, featuring sleek animations, score tracking, and smooth gameplay mechanics.",
+      "github": "https://github.com/Praveenkumarmelapu/Tic-Tac-Toe-",
+      "live_demo": null
+    }
+  ],
+  "experience": [
+    {
+      "role": "AI/ML Intern",
+      "company": "EDU SKILLS",
+      "duration": "Jul – Sep 2025",
+      "highlights": [
+        "Data preprocessing & analysis",
+        "Model building & evaluation",
+        "Utilized Python, NumPy, and Pandas"
+      ]
+    },
+    {
+      "role": "Web Dev Intern",
+      "company": "APSSDC",
+      "duration": "Apr – Jun 2025",
+      "highlights": [
+        "Django-based web applications development",
+        "Backend + frontend integration",
+        "Implemented full-stack development workflow"
+      ]
+    },
+    {
+      "role": "Embedded & IoT Intern",
+      "company": "Demy Software Solutions",
+      "duration": "Jun – Jul 2024",
+      "highlights": [
+        "Worked with ESP32 & Arduino UNO microcontrollers",
+        "Sensors & wireless communications interfacing",
+        "Hands-on prototype development"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Tech in Electronics and Communication Engineering (ECE)",
+      "institution": "Nadimpalli Satyanarayana Raju Institute of Engineering & Technology",
+      "duration": "2022 - 2026",
+      "score": "7.5 CGPA"
+    },
+    {
+      "degree": "Intermediate (MPC)",
+      "institution": "Narayana Junior College",
+      "duration": "2020 - 2022",
+      "score": "64%"
+    },
+    {
+      "degree": "Secondary School Certificate (SSC)",
+      "institution": "Swethachalapathi Samasthanam E.M School",
+      "duration": "2019 - 2020",
+      "score": "88.66%"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "AI/ML Internship Certificate",
+      "provider": "EDU SKILLS",
+      "year": "2025",
+      "description": "Comprehensive training in Machine Learning algorithms, data preprocessing, and model deployment.",
+      "link": "https://drive.google.com/file/d/1jttcbrF5rRLlCRInuT2sfMtj2MudWXp-/view?usp=drive_link"
+    },
+    {
+      "title": "Web Development",
+      "provider": "APSSDC",
+      "year": "2025",
+      "description": "Full-stack development using Python & Django, covering database management and frontend integration.",
+      "link": "https://drive.google.com/file/d/1oFHwssi7KyA4lG6F7Ir_uL3YKoUzHK2p/view?usp=drive_link"
+    },
+    {
+      "title": "Embedded Systems",
+      "provider": "Demy Software Solutions",
+      "year": "2024",
+      "description": "Hands-on experience with IoT protocols, sensor interfacing, and microcontroller programming.",
+      "link": "https://drive.google.com/file/d/1xeyMvVXGvZp4xzbeVu-ziO4KP7D_OH3O/view?usp=drive_link"
+    }
+  ],
+  "resume": {
+    "download_url": "https://drive.google.com/file/d/1qjC1v_y9fLAg6EHb6JYIofWNSvMm8jo9/view?usp=drive_link"
+  },
+  "contact": {
+    "email": "praveenkumarmelapu418@gmail.com",
+    "phone": "+91 6304426153",
+    "linkedin": "https://www.linkedin.com/in/praveen-kumar-melapu/",
+    "github": "https://github.com/Praveenkumarmelapu"
+  },
+  "services": [
+    {
+      "title": "Frontend Dev",
+      "description": "Crafting interactive, responsive, and user-centric interfaces."
+    },
+    {
+      "title": "Backend Dev",
+      "description": "Building secure, database-driven APIs and server logic."
+    },
+    {
+      "title": "Django & Python",
+      "description": "Developing scalable full-stack applications and services."
+    },
+    {
+      "title": "Performance & SEO",
+      "description": "Optimizing web performance, speed, and search visibility."
+    },
+    {
+      "title": "Embedded & IoT Projects",
+      "description": "Designing and building smart sensor prototypes using Arduino/ESP32."
+    }
+  ]
+}
