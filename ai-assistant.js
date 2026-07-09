@@ -501,14 +501,34 @@ If you don't know the answer, politely redirect them to his contact details.`
 
     function handleNameResponse(response) {
         const text = response.trim();
-        const skipRegex = /^(skip|no|rather not|prefer not|anonymous|none|stop|dont ask|don't ask|nevermind|private|secret|nay)/i;
+        const lowerText = text.toLowerCase();
         
+        // 1. If they say skip, no, rather not, anonymous, etc.
+        const skipRegex = /^(skip|no|rather not|prefer not|anonymous|none|stop|dont ask|don't ask|nevermind|private|secret|nay)/i;
         if (skipRegex.test(text)) {
             sessionStorage.setItem('nameState', 'skipped');
             streamAssistantResponse("No problem! We will continue anonymously. 😊 How can I help you today?");
             return;
         }
 
+        // 2. If they just say hi/hello/hey or similar greeting
+        const greetingRegex = /^(hi|hello|hey|yo|greetings|good\s+(morning|afternoon|evening)|sup|howdy)$/i;
+        if (greetingRegex.test(text)) {
+            streamAssistantResponse("Hello there! 😊 May I know your name before we begin? (You can also type 'skip' if you prefer to remain anonymous.)");
+            return;
+        }
+
+        // 3. If they ask a direct portfolio query instead of giving their name
+        const coreKeywords = ['project', 'skill', 'portfolio', 'experience', 'internship', 'education', 'contact', 'resume', 'cv', 'download', 'hire', 'services', 'available', 'job', 'work', 'what can you do', 'who is'];
+        const hasCoreKeyword = coreKeywords.some(keyword => lowerText.includes(keyword));
+        if (hasCoreKeyword) {
+            sessionStorage.setItem('nameState', 'skipped'); // auto-skip name collection
+            const answer = getIntelligentLocalResponse(text);
+            streamAssistantResponse(`Sure, let's jump straight to that! <br><br>${answer}`);
+            return;
+        }
+
+        // 4. Proceed with name extraction
         let name = '';
         const namePatterns = [
             /i'm\s+([a-zA-Z\s]+)/i,
@@ -532,6 +552,15 @@ If you don't know the answer, politely redirect them to his contact details.`
         }
 
         name = cleanName(name);
+
+        // Sanity check: if name matches common words or is empty, fallback to skipped
+        const commonWords = ['hi', 'hello', 'hey', 'yes', 'yup', 'yeah', 'sure', 'ok', 'okay', 'fine', 'good', 'nothing', 'someone', 'anyone', 'user', 'guest', 'none'];
+        if (!name || commonWords.includes(name.toLowerCase())) {
+            sessionStorage.setItem('nameState', 'skipped');
+            streamAssistantResponse("No problem! We will continue anonymously. 😊 How can I help you today?");
+            return;
+        }
+
         sessionStorage.setItem('visitorName', name);
         sessionStorage.setItem('nameState', 'stored');
 
