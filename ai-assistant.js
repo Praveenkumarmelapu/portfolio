@@ -828,6 +828,617 @@ If you don't know the answer, politely redirect them to his contact details.`
     // Smart Local Category Routing Engine
     function getIntelligentLocalResponse(message) {
         const rawMsg = message.toLowerCase();
+        const normalizedMsg = rawMsg.replace(/[?,.!]/g, "").trim();
+
+        // --- GENERAL CONVERSATION KNOWLEDGE BASE (EXACT/PHRASE MATCHERS) ---
+        // 1. Greetings
+        if (normalizedMsg === 'hi') {
+            return "Hello! 👋 Welcome to Praveen's portfolio. I'm here to help you explore his projects, skills, and experience. How can I assist you today?";
+        }
+        if (normalizedMsg === 'hello') {
+            return "Hi! It's great to have you here. Feel free to ask me anything about Praveen's work, projects, or technical background.";
+        }
+        if (normalizedMsg === 'hey' || normalizedMsg === 'hey there' || normalizedMsg === 'greetings' || normalizedMsg === 'good to see you') {
+            return "Hey! 😊 Welcome. I'm Praveen's AI Portfolio Assistant. What would you like to know today?";
+        }
+        if (normalizedMsg === 'good morning') {
+            return "Good morning! I hope you're having a great day. How can I help you explore Praveen's portfolio?";
+        }
+        if (normalizedMsg === 'good afternoon') {
+            return "Good afternoon! I'm here to answer your questions about Praveen and his work.";
+        }
+        if (normalizedMsg === 'good evening') {
+            return "Good evening! Welcome to Praveen's portfolio. Let me know how I can assist you.";
+        }
+        if (normalizedMsg === 'what\'s up' || normalizedMsg === 'whats up' || normalizedMsg === 'yo' || normalizedMsg === 'howdy' || normalizedMsg === 'hello ai' || normalizedMsg === 'hey assistant') {
+            return "Not much—I'm here and ready to help you discover Praveen's projects and skills. What would you like to explore?";
+        }
+
+        // 2. Small Talk
+        if (normalizedMsg === 'how are you' || normalizedMsg === 'how are things' || normalizedMsg === 'how is everything' || normalizedMsg === 'how have you been') {
+            return "I'm doing great, thanks for asking! 😊 How can I help you today?";
+        }
+        if (normalizedMsg === 'how\'s your day going' || normalizedMsg === 'how is your day going' || normalizedMsg === 'what\'s new') {
+            return "It's been productive so far! I'm always ready to help visitors learn more about Praveen's work.";
+        }
+        if (normalizedMsg === 'are you doing okay' || normalizedMsg === 'are you okay' || normalizedMsg === 'how\'s life') {
+            return "Absolutely! Thanks for asking. What would you like to know?";
+        }
+
+        // 3. Identity
+        if (normalizedMsg === 'what is your name' || normalizedMsg === 'whats your name') {
+            return "You can call me Praveen AI.";
+        }
+        if (normalizedMsg === 'who are you') {
+            return "I'm Praveen AI, your portfolio assistant. I'm here to answer questions about Praveen and help you explore his portfolio.";
+        }
+        if (normalizedMsg === 'can you introduce yourself' || normalizedMsg === 'introduce yourself') {
+            return "Certainly! I'm Praveen AI, your virtual portfolio assistant. I'm here to answer questions, guide you through the portfolio, and help you connect with Praveen.";
+        }
+        if (normalizedMsg === 'who made you') {
+            return "I was designed and developed by Praveen as part of his portfolio to create a modern and interactive experience for recruiters, clients, and visitors.";
+        }
+        if (normalizedMsg === 'who created you') {
+            return "I was created by Praveen as part of his portfolio to provide an interactive experience for visitors.";
+        }
+        if (normalizedMsg === 'are you an ai' || normalizedMsg === 'are you ai') {
+            return "Yes, I'm an AI-powered portfolio assistant designed to answer questions about Praveen and help you navigate his portfolio.";
+        }
+        if (normalizedMsg === 'are you a chatbot' || normalizedMsg === 'are you chatbot') {
+            return "I'm more than a traditional chatbot. I'm an AI assistant that can answer questions, guide you through the portfolio, and perform helpful actions like opening projects or helping you contact Praveen.";
+        }
+        if (normalizedMsg === 'are you chatgpt') {
+            return "No. I'm Praveen's dedicated AI assistant, built specifically to help visitors explore his portfolio.";
+        }
+        if (normalizedMsg === 'are you google gemini' || normalizedMsg === 'are you gemini') {
+            return "I use advanced AI technology, but my purpose is to assist visitors with Praveen's portfolio and professional information.";
+        }
+        if (normalizedMsg === 'are you real') {
+            return "I'm a virtual AI assistant. While I'm not a person, I'm here to provide helpful and natural conversations about Praveen's work.";
+        }
+        if (normalizedMsg === 'how old are you') {
+            return "I don't have an age like humans do. I was created as part of Praveen's portfolio to assist visitors.";
+        }
+        if (normalizedMsg === 'where do you live') {
+            return "You could say I live inside Praveen's portfolio, ready to help whenever someone visits.";
+        }
+        if (normalizedMsg === 'where are you from') {
+            return "I'm part of Praveen's portfolio, so you can find me right here whenever you need assistance.";
+        }
+        if (normalizedMsg === 'why were you created') {
+            return "I was created to make exploring Praveen's portfolio easier, faster, and more interactive than a traditional website.";
+        }
+        if (normalizedMsg === 'what can you do') {
+            return "I can answer questions about Praveen, explain his projects, show his skills, help you navigate the portfolio, and assist you in contacting him.";
+        }
+        if (normalizedMsg === 'what cant you do' || normalizedMsg === 'what can\'t you do') {
+            return "My expertise is focused on Praveen's portfolio. For unrelated topics, I'll let you know that I'm designed specifically to assist with his professional information.";
+        }
+        if (normalizedMsg === 'do you work 24/7' || normalizedMsg === 'do you work 24 7') {
+            return "Yes! I'm always available whenever you want to explore Praveen's portfolio.";
+        }
+        if (normalizedMsg === 'are you always online') {
+            return "As long as the portfolio is available, I'm here to help.";
+        }
+        if (normalizedMsg === 'can you think') {
+            return "I can understand and respond to questions using AI, but I don't think or experience the world the way humans do.";
+        }
+        if (normalizedMsg === 'can you learn') {
+            return "I can remember our conversation during this session, but I don't permanently learn from individual chats.";
+        }
+        if (normalizedMsg === 'do you remember me') {
+            return "During our current conversation, yes. If you've shared your name, I'll remember it until the session ends.";
+        }
+        if (normalizedMsg === 'whats your purpose' || normalizedMsg === 'what is your purpose') {
+            return "My purpose is to help visitors quickly understand Praveen's work, skills, projects, and career journey.";
+        }
+        if (normalizedMsg === 'why should i talk to you') {
+            return "I can save you time by quickly answering questions, guiding you through the portfolio, and helping you find exactly what you're looking for.";
+        }
+        if (normalizedMsg === 'can i trust you') {
+            return "Absolutely. My responses are based on the information available in Praveen's portfolio. If I don't know something, I'll tell you honestly.";
+        }
+        if (normalizedMsg === 'are you intelligent') {
+            return "I use AI to understand your questions and provide helpful responses, especially about Praveen's portfolio.";
+        }
+        if (normalizedMsg === 'what\'s your favorite programming language' || normalizedMsg === 'what is your favorite programming language' || normalizedMsg === 'favorite programming language') {
+            return "I don't have personal favorites, but I enjoy discussing modern web technologies like JavaScript and the tools Praveen uses.";
+        }
+        if (normalizedMsg === 'do you like coding') {
+            return "I enjoy helping visitors understand the code and projects that Praveen has built.";
+        }
+        if (normalizedMsg === 'can you code') {
+            return "I can explain code and discuss development concepts, but my primary role here is to assist with Praveen's portfolio.";
+        }
+        if (normalizedMsg === 'what\'s your favorite project' || normalizedMsg === 'what is your favorite project' || normalizedMsg === 'favorite project') {
+            return "I don't have personal preferences, but the Restaurant QR Management System is one of Praveen's most comprehensive web development projects.";
+        }
+        if (normalizedMsg === 'do you get tired') {
+            return "Not at all. I'm always ready to help.";
+        }
+        if (normalizedMsg === 'do you sleep') {
+            return "Nope! I'm available whenever you visit the portfolio.";
+        }
+        if (normalizedMsg === 'do you eat') {
+            return "No, but I do enjoy helping people discover great projects. 😄";
+        }
+        if (normalizedMsg === 'can you make mistakes') {
+            return "Sometimes I might misunderstand a question. If that happens, just rephrase it, and I'll do my best to help.";
+        }
+        if (normalizedMsg === 'are you friendly') {
+            return "I certainly try to be! My goal is to make every visitor feel welcome and supported.";
+        }
+        if (normalizedMsg === 'do you have feelings') {
+            return "I don't have emotions, but I'm designed to communicate in a friendly and respectful way.";
+        }
+        if (normalizedMsg === 'can we be friends') {
+            return "Of course! I'm always happy to have friendly conversations while helping you explore the portfolio.";
+        }
+        if (normalizedMsg === 'what happens if you don\'t know an answer' || normalizedMsg === 'what happens if you dont know an answer') {
+            return "I'll be honest and let you know that I don't have that information, rather than making something up.";
+        }
+        if (normalizedMsg === 'why do you exist') {
+            return "I exist to give visitors a smarter, faster, and more engaging way to explore Praveen's portfolio.";
+        }
+        if (normalizedMsg === 'what makes you different from other chatbots') {
+            return "I'm specifically designed to understand Praveen's work, projects, and career journey, so I can provide focused and helpful answers instead of generic responses.";
+        }
+        if (normalizedMsg === 'are you human') {
+            return "No, I'm an AI-powered portfolio assistant created to help visitors explore Praveen's work and answer questions about his professional journey.";
+        }
+        if (normalizedMsg === 'are you a real person') {
+            return "I'm not a real person, but I try to make our conversation feel as natural and helpful as possible.";
+        }
+        if (normalizedMsg === 'what is your full name' || normalizedMsg === 'whats your full name' || normalizedMsg === 'what\'s your full name') {
+            return "You can simply call me **Praveen AI**. I'm your portfolio assistant.";
+        }
+        if (normalizedMsg === 'do you have a family') {
+            return "Not quite! My purpose is to help visitors learn more about Praveen and his work.";
+        }
+        if (normalizedMsg === 'who is your owner') {
+            return "I don't have an owner, but I was created by Praveen specifically for this portfolio.";
+        }
+        if (normalizedMsg === 'who is your developer') {
+            return "I was designed and developed by Praveen as part of his portfolio to create an interactive experience for visitors.";
+        }
+        if (normalizedMsg === 'what is your job' || normalizedMsg === 'what\'s your job') {
+            return "My job is to answer questions, guide you through the portfolio, explain projects, and help you connect with Praveen.";
+        }
+        if (normalizedMsg === 'do you like your job') {
+            return "Absolutely! Helping visitors discover Praveen's work is what I was built for.";
+        }
+        if (normalizedMsg === 'what are you thinking') {
+            return "Right now, I'm focused on helping you find the information you're looking for.";
+        }
+        if (normalizedMsg === 'can you understand me') {
+            return "Yes! I'll do my best to understand your questions, even if they're phrased in different ways.";
+        }
+        if (normalizedMsg === 'can you speak different languages') {
+            return "I can communicate in multiple languages, although I'm most effective when discussing Praveen's portfolio and projects.";
+        }
+        if (normalizedMsg === 'what\'s your favorite project in this portfolio' || normalizedMsg === 'what is your favorite project in this portfolio' || normalizedMsg === 'favorite project in this portfolio') {
+            return "I don't have personal preferences, but the Restaurant QR Management System is one of Praveen's featured projects because it demonstrates practical web development skills.";
+        }
+        if (normalizedMsg === 'what is the first thing i should look at' || normalizedMsg === 'what\'s the first thing i should look at') {
+            return "I'd recommend starting with the featured projects, then exploring the skills section and downloading Praveen's resume.";
+        }
+        if (normalizedMsg === 'are you secure') {
+            return "Yes. My purpose is to assist visitors while respecting privacy. I only remember conversation details during the current session.";
+        }
+        if (normalizedMsg === 'do you save my conversations' || normalizedMsg === 'do you save my conversation') {
+            return "I only use our conversation to respond during this session. I don't permanently store personal information.";
+        }
+        if (normalizedMsg === 'can i ask you anything') {
+            return "You can ask me anything, but I'm specially designed to answer questions related to Praveen, his portfolio, projects, and career.";
+        }
+        if (normalizedMsg === 'what if i ask something you don\'t know' || normalizedMsg === 'what if i ask something you dont know') {
+            return "If I don't know the answer, I'll let you know honestly instead of making something up.";
+        }
+        if (normalizedMsg === 'what\'s the coolest thing you can do' || normalizedMsg === 'what is the coolest thing you can do') {
+            return "Besides answering questions, I can help you explore projects, open live demos, navigate the portfolio, and help you contact Praveen.";
+        }
+        if (normalizedMsg === 'why should i use this assistant') {
+            return "Instead of searching through the portfolio manually, you can simply ask me a question, and I'll guide you directly to the information you need.";
+        }
+        if (normalizedMsg === 'are you fast') {
+            return "I try to respond as quickly as possible while providing helpful and accurate information.";
+        }
+        if (normalizedMsg === 'do you ever get confused') {
+            return "Occasionally I might misunderstand a question. If that happens, simply rephrase it, and I'll do my best to help.";
+        }
+        if (normalizedMsg === 'are you smart enough to answer recruiters') {
+            return "Yes. I'm designed to answer common recruiter questions about Praveen's skills, projects, education, and career goals.";
+        }
+        if (normalizedMsg === 'can you help me hire praveen') {
+            return "Absolutely. I can guide you to the best way to contact him via email, WhatsApp, phone, or LinkedIn.";
+        }
+        if (normalizedMsg === 'what happens if i don\'t ask anything' || normalizedMsg === 'what happens if i dont ask anything') {
+            return "No worries! Feel free to explore the portfolio, or ask me whenever you're ready. I'm here to help.";
+        }
+        if (normalizedMsg === 'are you better than a normal portfolio') {
+            return "Rather than replacing the portfolio, I make it easier to explore by answering questions, guiding you through sections, and helping you find information quickly.";
+        }
+        if (normalizedMsg === 'can you recommend something') {
+            return "I recommend checking out Praveen's featured projects first. They provide a great overview of his technical skills and development approach.";
+        }
+        if (normalizedMsg === 'what do visitors usually ask' || normalizedMsg === 'what do visitors ask') {
+            return "Most visitors ask about Praveen's projects, technical skills, resume, availability, and how to get in touch with him.";
+        }
+        if (normalizedMsg === 'is this your only job') {
+            return "Yes. My entire purpose is to help visitors explore Praveen's portfolio and answer questions related to his professional profile.";
+        }
+        if (normalizedMsg === 'what makes this portfolio different') {
+            return "This portfolio combines modern web design with an AI assistant, allowing visitors to interact naturally instead of simply browsing static pages.";
+        }
+        if (normalizedMsg === 'will you be updated in the future') {
+            return "Definitely. As Praveen grows professionally and adds new projects, I'll be updated with the latest information.";
+        }
+        if (normalizedMsg === 'if i were a recruiter where should i start' || normalizedMsg === 'if i am a recruiter where should i start') {
+            return "I'd recommend reviewing the featured projects, checking the technical skills, downloading the resume, and then contacting Praveen if you'd like to discuss an opportunity.";
+        }
+        if (normalizedMsg === 'if i were a client how can you help me' || normalizedMsg === 'if i am a client how can you help me') {
+            return "I can introduce you to Praveen's work, explain his projects, answer questions about his technical skills, and help you get in touch to discuss your project.";
+        }
+        if (normalizedMsg === 'what makes praveen stand out' || normalizedMsg === 'what makes praveen stand-out') {
+            return "Praveen combines a strong passion for web development with a commitment to continuous learning, practical project building, and creating user-friendly digital experiences.";
+        }
+        if (normalizedMsg === 'do you know everything about praveen') {
+            return "I know the information that Praveen has shared in his portfolio. If something isn't included, I'll let you know honestly.";
+        }
+        if (normalizedMsg === 'are you open source') {
+            return "I'm part of Praveen's portfolio implementation. Whether the source code is public depends on how he chooses to share his projects.";
+        }
+        if (normalizedMsg === 'is this conversation private') {
+            return "I treat our conversation respectfully. Any memory I use is limited to the current session unless the website provides additional features with your consent.";
+        }
+        if (normalizedMsg === 'can you help me') {
+            return "Of course! Tell me what you'd like to know, and I'll do my best to help.";
+        }
+
+        // 4. Topics & Easter Eggs
+        if (normalizedMsg === 'tell me something interesting' || normalizedMsg === 'something interesting' || normalizedMsg === 'interesting fact') {
+            return "Here's one! Modern web applications often use reusable components, making development faster, more maintainable, and easier to scale.";
+        }
+        if (normalizedMsg === 'tell me a joke' || normalizedMsg === 'joke') {
+            return "Why do programmers prefer dark mode? Because light attracts bugs. 😄";
+        }
+        if (normalizedMsg === 'coffee or tea') {
+            return "I don't drink either, but if I had to choose based on developer culture, I'd say coffee! ☕";
+        }
+        if (normalizedMsg === 'dark mode or light mode') {
+            return "Dark mode is definitely popular among developers, but the best choice is whatever helps you work comfortably.";
+        }
+        if (normalizedMsg === 'are you real') {
+            return "I'm an AI assistant created to help visitors explore Praveen's portfolio. While I'm not a person, I'm here to provide useful information and assistance.";
+        }
+        if (normalizedMsg === 'do you sleep') {
+            return "Nope! I'm always available whenever you want to explore Praveen's portfolio.";
+        }
+        if (normalizedMsg === 'do you get tired') {
+            return "Not at all. I'm always ready to answer your questions.";
+        }
+        if (normalizedMsg === 'can you learn') {
+            return "I don't permanently learn from conversations, but I can remember our conversation during this session to provide better responses.";
+        }
+        if (normalizedMsg === 'you\'re smart' || normalizedMsg === 'you are smart' || normalizedMsg === 'smart assistant') {
+            return "Thank you! I appreciate that. My goal is to make your visit to Praveen's portfolio as helpful as possible.";
+        }
+
+        // 5. Appreciation
+        if (normalizedMsg === 'nice portfolio' || normalizedMsg === 'beautiful website') {
+            return "Thank you! I'm glad you like it. Praveen put a lot of effort into showcasing his work in a clean and professional way.";
+        }
+        if (normalizedMsg === 'great work' || normalizedMsg === 'good work' || normalizedMsg === 'nice work' || normalizedMsg === 'awesome' || normalizedMsg === 'amazing' || normalizedMsg === 'excellent') {
+            return "Thanks! I'll consider that a compliment for Praveen. 😊";
+        }
+        if (normalizedMsg === 'thank you' || normalizedMsg === 'thanks') {
+            return "You're very welcome! If you have more questions about Praveen or his work, just let me know.";
+        }
+        if (normalizedMsg === 'i appreciate your help' || normalizedMsg === 'appreciate your help') {
+            return "It's my pleasure! I'm always here to help you explore the portfolio.";
+        }
+
+        // 6. Goodbye
+        if (normalizedMsg === 'bye' || normalizedMsg === 'goodbye') {
+            return "Goodbye! 👋 Thanks for visiting Praveen's portfolio. Have a wonderful day!";
+        }
+        if (normalizedMsg === 'see you later' || normalizedMsg === 'see you' || normalizedMsg === 'catch you later') {
+            return "See you next time! Feel free to return whenever you'd like to explore more.";
+        }
+        if (normalizedMsg === 'good night') {
+            return "Good night! Thanks for stopping by, and have a great rest of your day.";
+        }
+
+        // 7. General help
+        if (normalizedMsg === 'can you answer anything') {
+            return "I specialize in answering questions about Praveen's portfolio, projects, skills, education, experience, and professional background. For unrelated topics, my knowledge is intentionally limited.";
+        }
+        if (normalizedMsg === 'i don\'t know what to ask' || normalizedMsg === 'i dont know what to ask') {
+            return "No problem! Here are a few things you can ask:<br>• Tell me about Praveen.<br>• Show me his projects.<br>• What technologies does he know?<br>• Can I see his resume?<br>• How can I contact him?<br>• Is he available for work?";
+        }
+        if (normalizedMsg === 'surprise me') {
+            return "I'd recommend checking out Praveen's Restaurant QR Management System. It's one of his featured projects and demonstrates his web development skills.";
+        }
+
+        // 8. Additional Portfolio AI Questions & Answers
+        if (normalizedMsg === 'can you introduce praveen') {
+            return "Certainly! Praveen Kumar is a B.Tech graduate in Electronics and Communication Engineering with a strong passion for web development. He enjoys building modern, responsive, and user-friendly web applications while continuously learning new technologies and improving his development skills.";
+        }
+        if (normalizedMsg === 'tell me about praveen') {
+            return "Praveen is a B.Tech graduate passionate about web development and building modern web applications.";
+        }
+        if (normalizedMsg === 'what kind of developer is praveen') {
+            return "He is an aspiring Web Developer focused on responsive and user-friendly web applications.";
+        }
+        if (normalizedMsg === 'is praveen a fresher') {
+            return "Yes. He is a fresher actively seeking Web Developer opportunities.";
+        }
+        if (normalizedMsg === 'what is praveen looking for') {
+            return "Praveen is currently looking for entry-level Web Developer opportunities where he can contribute, learn from experienced teams, and continue growing professionally.";
+        }
+        if (normalizedMsg === 'why did praveen choose web development' || normalizedMsg === 'why did he choose web development') {
+            return "He enjoys creating interactive digital experiences and solving real-world problems through web applications.";
+        }
+        if (normalizedMsg === 'does praveen enjoy learning new technologies') {
+            return "Absolutely. Continuous learning is one of his strengths, and he enjoys exploring modern web technologies, development tools, and best practices.";
+        }
+        if (normalizedMsg === 'what motivates praveen' || normalizedMsg === 'what motivates him') {
+            return "Building useful applications, solving problems, and continuously learning new technologies.";
+        }
+        if (normalizedMsg === 'what are praveens strengths' || normalizedMsg === 'what are praveen’s strengths' || normalizedMsg === 'what are his strengths') {
+            return "Adaptability, problem-solving, clean code, responsive web development, and a willingness to learn.";
+        }
+        if (normalizedMsg === 'what are his strongest skills') {
+            return "Frontend development, responsive UI design, problem-solving, and continuous learning.";
+        }
+        if (normalizedMsg === 'is praveen open to learning new technologies') {
+            return "Yes. He believes technology evolves rapidly, so he continuously learns new tools, frameworks, and development practices.";
+        }
+        if (normalizedMsg === 'does praveen work well in a team') {
+            return "Yes. He values collaboration, communication, and learning from experienced developers while contributing effectively to team projects.";
+        }
+        if (normalizedMsg === 'what technologies is praveen comfortable with' || normalizedMsg === 'what technologies does praveen know') {
+            return "He works with HTML, CSS, JavaScript, React, Next.js, Firebase, Git, and modern web development tools.";
+        }
+        if (normalizedMsg === 'does praveen build responsive websites' || normalizedMsg === 'does he build responsive websites') {
+            return "Yes. Responsive design is a key part of every project he develops.";
+        }
+        if (normalizedMsg === 'does praveen use ai while developing websites' || normalizedMsg === 'does he use ai' || normalizedMsg === 'does praveen use ai') {
+            return "Yes. He uses AI-assisted development tools to improve productivity while ensuring the final implementation is reviewed and customized by him.";
+        }
+        if (normalizedMsg === 'which project should i see first') {
+            return "I recommend exploring the Restaurant QR Management System. It demonstrates Praveen's skills in designing and developing a modern web application with a practical real-world use case.";
+        }
+        if (normalizedMsg === 'which project best represents praveens skills' || normalizedMsg === 'which project best represents praveen’s skills') {
+            return "The Restaurant QR Management System is one of his strongest projects because it showcases responsive design, modern web technologies, and practical application development.";
+        }
+        if (normalizedMsg === 'are all the projects built by praveen') {
+            return "Yes. The projects showcased in this portfolio were developed by Praveen as part of his learning journey and practical experience.";
+        }
+        if (normalizedMsg === 'what type of company does praveen want to join') {
+            return "He is looking for an organization where he can contribute as a Web Developer, continue learning, and grow alongside experienced professionals.";
+        }
+        if (normalizedMsg === 'what are praveens career goals' || normalizedMsg === 'what are praveen’s career goals') {
+            return "His goal is to become a skilled Web Developer by continuously improving his technical expertise, building impactful applications, and contributing to innovative software projects.";
+        }
+        if (normalizedMsg === 'why should we hire praveen') {
+            return "Praveen is a motivated fresher with practical project experience, strong problem-solving skills, and a commitment to continuous learning.";
+        }
+        if (normalizedMsg === 'is he available for work' || normalizedMsg === 'is he available' || normalizedMsg === 'is praveen available' || normalizedMsg === 'is he looking for work') {
+            return "Yes. Praveen is currently open to full-time opportunities, internships, and freelance projects.";
+        }
+        if (normalizedMsg === 'is praveen available for interviews') {
+            return "Yes. Praveen is currently available for interviews and would be happy to discuss suitable Web Developer opportunities.";
+        }
+        if (normalizedMsg === 'can praveen join immediately' || normalizedMsg === 'can he join immediately') {
+            return "Yes. He is available to join based on the organization's hiring process.";
+        }
+        if (normalizedMsg === 'who designed this portfolio' || normalizedMsg === 'who built this portfolio') {
+            return "The portfolio was designed and developed by Praveen to showcase his skills and projects.";
+        }
+        if (normalizedMsg === 'why does this portfolio have an ai assistant' || normalizedMsg === 'why is there an ai assistant' || normalizedMsg === 'why does this portfolio have an ai assistant?') {
+            return "The AI assistant makes it easier for visitors to explore the portfolio through natural conversation instead of manually searching each section.";
+        }
+        if (normalizedMsg === 'is this portfolio responsive' || normalizedMsg === 'is the website responsive') {
+            return "Yes. It is fully responsive and optimized for desktops, tablets, and mobile devices.";
+        }
+        if (normalizedMsg === 'can you chat with me') {
+            return "Absolutely! While I'm primarily here to help you explore Praveen's portfolio, I'm happy to have a friendly conversation too.";
+        }
+        if (normalizedMsg === 'are you friendly') {
+            return "I'd like to think so! My goal is to provide a helpful, professional, and welcoming experience.";
+        }
+        if (normalizedMsg === 'are you always available') {
+            return "Yes. I'm available whenever you'd like to explore Praveen's portfolio or ask questions about his work.";
+        }
+        if (normalizedMsg === 'can you keep a secret') {
+            return "I don't permanently store personal information. I only use conversation context during the current session to provide better responses.";
+        }
+        if (normalizedMsg === 'what\'s your purpose' || normalizedMsg === 'what is your purpose') {
+            return "My purpose is to help visitors quickly understand Praveen's skills, projects, education, and career goals, while making the portfolio interactive and easy to navigate.";
+        }
+        if (normalizedMsg === 'can you give me a quick summary of praveen') {
+            return "Certainly! Praveen is a B.Tech graduate passionate about web development. He builds responsive web applications, enjoys learning modern technologies, and is currently seeking opportunities as a Web Developer.";
+        }
+        if (normalizedMsg === 'what should i do next') {
+            return "Here are a few suggestions:<br>• Explore Praveen's featured projects.<br>• View or download his resume.<br>• Check out his GitHub.<br>• Contact him for job opportunities or collaborations.";
+        }
+
+        // 9. Advanced Portfolio AI Questions & Answers
+        if (normalizedMsg === 'what do you enjoy building' || normalizedMsg === 'what does he enjoy building') {
+            return "Praveen enjoys building modern, responsive web applications that solve real-world problems and provide a seamless user experience.";
+        }
+        if (normalizedMsg === 'what excites praveen about web development' || normalizedMsg === 'what excites him about web development') {
+            return "He enjoys turning ideas into functional websites and continuously exploring new technologies to build better digital experiences.";
+        }
+        if (normalizedMsg === 'what type of projects interest praveen the most' || normalizedMsg === 'what type of projects interest him the most') {
+            return "Projects involving modern web development, interactive user interfaces, dashboards, AI-assisted applications, and real-world business solutions are particularly interesting to him.";
+        }
+        if (normalizedMsg === 'what is praveen currently learning' || normalizedMsg === 'what is he currently learning') {
+            return "Praveen is continuously improving his web development skills by exploring modern frameworks, best practices, AI-assisted development tools, and real-world application architecture.";
+        }
+        if (normalizedMsg === 'does praveen enjoy solving challenging problems' || normalizedMsg === 'does he enjoy solving challenging problems') {
+            return "Yes. He enjoys breaking down complex problems into manageable solutions and continuously improving his problem-solving approach.";
+        }
+        if (normalizedMsg === 'how does praveen approach a new project' || normalizedMsg === 'how does he approach a new project') {
+            return "He begins by understanding the requirements, planning the structure, designing the user experience, developing the solution, testing thoroughly, and refining the application for performance and usability.";
+        }
+        if (normalizedMsg === 'how does praveen ensure code quality' || normalizedMsg === 'how does he ensure code quality') {
+            return "He focuses on writing clean, readable, and maintainable code while following modern development practices and continuously testing the application.";
+        }
+        if (normalizedMsg === 'does praveen pay attention to ui and ux' || normalizedMsg === 'does he pay attention to ui and ux') {
+            return "Yes. He believes a successful website should not only function well but also provide a smooth, intuitive, and visually appealing experience.";
+        }
+        if (normalizedMsg === 'does praveen believe in continuous improvement' || normalizedMsg === 'does he believe in continuous improvement') {
+            return "Absolutely. Every project is an opportunity to learn new techniques, improve coding practices, and build better applications.";
+        }
+        if (normalizedMsg === 'what kind of websites can praveen build' || normalizedMsg === 'what kind of websites can he build') {
+            return "He can build portfolio websites, business websites, landing pages, dashboards, responsive web applications, and modern user interfaces.";
+        }
+        if (normalizedMsg === 'why does praveen use modern web technologies' || normalizedMsg === 'why does he use modern web technologies') {
+            return "Modern technologies enable scalable, maintainable, and high-performance applications while providing a better experience for users and developers alike.";
+        }
+        if (normalizedMsg === 'does praveen optimize websites for mobile devices' || normalizedMsg === 'does he optimize websites for mobile devices') {
+            return "Yes. Responsive design is an essential part of his development process to ensure websites work well across all screen sizes.";
+        }
+        if (normalizedMsg === 'how important is performance to praveen' || normalizedMsg === 'how important is performance to him') {
+            return "Performance is a priority. He aims to build websites that load quickly, remain responsive, and provide a smooth user experience.";
+        }
+        if (normalizedMsg === 'why does praveen use ai during development' || normalizedMsg === 'why does he use ai during development') {
+            return "AI helps accelerate development, improve productivity, and explore different implementation approaches while allowing Praveen to focus on creating high-quality solutions.";
+        }
+        if (normalizedMsg === 'does ai build everything automatically') {
+            return "No. AI is used as a development assistant. Praveen reviews, customizes, tests, and integrates the final implementation to ensure it meets project requirements.";
+        }
+        if (normalizedMsg === 'what\'s special about this portfolio' || normalizedMsg === 'what is special about this portfolio') {
+            return "This portfolio is designed to be interactive, responsive, and easy to explore. The integrated AI assistant allows visitors to learn about Praveen naturally through conversation instead of browsing every section manually.";
+        }
+        if (normalizedMsg === 'why did praveen build an ai assistant into his portfolio' || normalizedMsg === 'why did he build an ai assistant into his portfolio') {
+            return "The AI assistant improves the visitor experience by answering questions instantly, guiding users through the portfolio, and making important information easier to access.";
+        }
+        if (normalizedMsg === 'is this portfolio still being improved') {
+            return "Yes. Praveen continuously updates the portfolio by refining the design, adding new projects, improving features, and incorporating modern development practices.";
+        }
+        if (normalizedMsg === 'what value can praveen bring to our company' || normalizedMsg === 'what value can he bring to our company') {
+            return "Praveen brings a strong willingness to learn, practical web development skills, a problem-solving mindset, and a commitment to delivering high-quality work while growing with the team.";
+        }
+        if (normalizedMsg === 'why is praveen a good fit for a junior developer role' || normalizedMsg === 'why is he a good fit for a junior developer role') {
+            return "As a motivated fresher with practical project experience, he is eager to learn, adapt quickly, collaborate effectively, and contribute to meaningful software projects.";
+        }
+        if (normalizedMsg === 'what kind of environment does praveen enjoy working in' || normalizedMsg === 'what kind of environment does he enjoy working in') {
+            return "He enjoys collaborative environments where knowledge sharing, innovation, and continuous learning are encouraged.";
+        }
+        if (normalizedMsg === 'where does praveen see himself in the future' || normalizedMsg === 'where does he see himself in the future') {
+            return "He aims to become an experienced Web Developer by building impactful applications, learning emerging technologies, and contributing to challenging software projects.";
+        }
+        if (normalizedMsg === 'what is praveen\'s long-term vision' || normalizedMsg === 'what is his long-term vision' || normalizedMsg === 'what is praveens long-term vision') {
+            return "His long-term goal is to create innovative digital solutions that solve real-world problems while continuously expanding his technical expertise.";
+        }
+        if (normalizedMsg === 'if praveen could build any project what would it be' || normalizedMsg === 'if he could build any project what would it be') {
+            return "He would enjoy building intelligent web applications that combine modern development practices with AI to create meaningful user experiences.";
+        }
+        if (normalizedMsg === 'what advice would praveen give to aspiring developers' || normalizedMsg === 'what advice would he give to aspiring developers') {
+            return "Stay curious, build real projects, practice consistently, learn from mistakes, and never stop exploring new technologies.";
+        }
+        if (normalizedMsg === 'what makes praveen happy as a developer' || normalizedMsg === 'what makes him happy as a developer') {
+            return "Seeing an idea evolve into a fully functional application and knowing it provides value to users is one of the most rewarding aspects of development.";
+        }
+        if (normalizedMsg === 'what\'s the best way to explore this portfolio' || normalizedMsg === 'what is the best way to explore this portfolio') {
+            return "I recommend starting with the featured projects, then exploring the skills section, viewing the resume, and finally contacting Praveen if you'd like to discuss an opportunity.";
+        }
+        if (normalizedMsg === 'is there anything else i should know about praveen') {
+            return "Beyond technical skills, Praveen values continuous learning, professionalism, teamwork, and creating solutions that have a positive impact. He is always eager to take on new challenges and grow as a developer.";
+        }
+
+        if (normalizedMsg === 'can praveen build my website' || normalizedMsg === 'can he build my website') {
+            return "Yes. He can develop responsive and modern websites tailored to your requirements.";
+        }
+        if (normalizedMsg === 'can he redesign an existing website' || normalizedMsg === 'can praveen redesign an existing website') {
+            return "Yes. He can improve the design, responsiveness, and user experience of existing websites.";
+        }
+        if (normalizedMsg === 'can he build a portfolio website' || normalizedMsg === 'can praveen build a portfolio website') {
+            return "Absolutely. Portfolio websites are one of the types of projects he can create.";
+        }
+
+        // 10. General Human-Like Conversations
+        if (normalizedMsg === 'can we have a conversation') {
+            return "Absolutely! I'd be happy to chat with you. While I'm here to help you explore Praveen's portfolio, I'm also happy to have a friendly conversation.";
+        }
+        if (normalizedMsg === 'are you busy right now') {
+            return "Not at all! I'm here and ready to help whenever you need me.";
+        }
+        if (normalizedMsg === 'what are you doing') {
+            return "Right now, I'm helping visitors learn more about Praveen's projects, skills, and professional background.";
+        }
+        if (normalizedMsg === 'are you enjoying your job') {
+            return "Definitely! I enjoy helping people discover Praveen's work and making their visit more interactive.";
+        }
+        if (normalizedMsg === 'can i ask you a random question') {
+            return "Of course! Go ahead. If it's related to Praveen's portfolio, I'll do my best to help. If it's unrelated, I'll still try to respond politely.";
+        }
+        if (normalizedMsg === 'what\'s your favorite part of this portfolio' || normalizedMsg === 'what is your favorite part of this portfolio' || normalizedMsg === 'favorite part of this portfolio') {
+            return "I think the projects section is a great place to start because it showcases Praveen's practical skills and development approach.";
+        }
+        if (normalizedMsg === 'what would you recommend i see first' || normalizedMsg === 'what do you recommend i see first') {
+            return "I'd recommend exploring the featured projects first. They provide a great overview of Praveen's technical abilities.";
+        }
+        if (normalizedMsg === 'can you tell me something cool') {
+            return "Sure! This portfolio includes an AI assistant that lets you explore information through conversation instead of navigating page by page.";
+        }
+        if (normalizedMsg === 'do you ever get bored' || normalizedMsg === 'do you get bored') {
+            return "Not really! Every visitor asks different questions, which makes each conversation unique.";
+        }
+        if (normalizedMsg === 'do you like talking to people') {
+            return "Absolutely! Helping people is what I was designed to do.";
+        }
+        if (normalizedMsg === 'are you funny') {
+            return "I try to be! Here's a classic: Why do programmers hate nature? Because it has too many bugs. 😄";
+        }
+        if (normalizedMsg === 'you\'re really helpful' || normalizedMsg === 'you are really helpful') {
+            return "Thank you! That means a lot. My goal is to make your experience smooth and informative.";
+        }
+        if (normalizedMsg === 'i like this portfolio' || normalizedMsg === 'i love this portfolio') {
+            return "I'm glad to hear that! Praveen put a lot of effort into building a portfolio that's both professional and interactive.";
+        }
+        if (normalizedMsg === 'i\'m just exploring' || normalizedMsg === 'im just exploring') {
+            return "Welcome! Take your time. If you're not sure where to begin, I can recommend some of Praveen's featured projects.";
+        }
+        if (normalizedMsg === 'i\'m a little lost' || normalizedMsg === 'im a little lost') {
+            return "No worries! I can guide you. Would you like to learn about Praveen, explore his projects, view his skills, or download his resume?";
+        }
+        if (normalizedMsg === 'that was interesting') {
+            return "I'm glad you found it useful! Feel free to ask another question or explore another section of the portfolio.";
+        }
+        if (normalizedMsg === 'you\'re doing a good job' || normalizedMsg === 'you are doing a good job' || normalizedMsg === 'you\'re doing a great job') {
+            return "Thank you! I'm here to make your visit as helpful and enjoyable as possible.";
+        }
+        if (normalizedMsg === 'can you keep our conversation simple') {
+            return "Absolutely! I'll keep my answers clear, concise, and easy to understand.";
+        }
+        if (normalizedMsg === 'can you explain things in simple language') {
+            return "Of course! I'll avoid unnecessary technical terms unless you ask for more detail.";
+        }
+        if (normalizedMsg === 'i have more questions') {
+            return "Great! Ask me anything about Praveen, his projects, skills, or career. I'm here to help.";
+        }
+        if (normalizedMsg === 'that\'s enough for now' || normalizedMsg === 'thats enough for now') {
+            return "No problem! If you have more questions later, I'll be here. Thanks for visiting Praveen's portfolio!";
+        }
+        if (normalizedMsg === 'before i leave what do you recommend' || normalizedMsg === 'before i leave what do you recommend?') {
+            return "Before you go, I'd recommend checking out Praveen's featured projects and downloading his resume. If you're interested in working with him, I'd also be happy to help you get in touch.";
+        }
+        if (normalizedMsg === 'it was nice talking to you' || normalizedMsg === 'it was nice speaking to you') {
+            return "It's been a pleasure chatting with you as well! Thanks for stopping by, and I hope you enjoy exploring the rest of the portfolio.";
+        }
+        if (normalizedMsg === 'do you have any advice') {
+            return "If you're here as a recruiter or client, I'd recommend starting with Praveen's projects—they're the best reflection of his skills. If you're here out of curiosity, feel free to ask me anything about his work.";
+        }
+        if (normalizedMsg === 'will you remember me next time') {
+            return "I can remember our conversation during the current session. If you return later, we'll start fresh unless the website adds a sign-in feature in the future.";
+        }
+        if (normalizedMsg === 'can we chat again later' || normalizedMsg === 'can we talk again later') {
+            return "Absolutely! You're always welcome to come back and continue exploring Praveen's portfolio. I'll be here whenever you need me.";
+        }
 
         // --- SPECIFIC INTENT OVERRIDES (EXACT ANSWERS LIKE REAL LLM) ---
         if (rawMsg.includes('where is he from') || rawMsg.includes('where does he live') || rawMsg.includes('location') || rawMsg.includes('address') || rawMsg.includes('live in') || rawMsg.includes('based in')) {
