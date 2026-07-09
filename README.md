@@ -2,6 +2,8 @@
 
 A modern, responsive, and glassmorphic personal portfolio website. It features a custom, self-contained **AI Portfolio Assistant** widget to provide visitors with an interactive, conversational exploration of the portfolio.
 
+🔗 **Live Link:** [https://praveenkumarmelapu.github.io/portfolio/](https://praveenkumarmelapu.github.io/portfolio/)
+
 ---
 
 ## 🎨 Portfolio Features
