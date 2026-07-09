@@ -362,9 +362,11 @@ If you don't know the answer, politely redirect them to his contact details.`
         const tooltip = document.getElementById('ai-tooltip');
         const tooltipClose = document.getElementById('ai-tooltip-close');
 
+        let tooltipDismissed = false;
+
         // Show tooltip 3.5s after load if not dismissed
         setTimeout(() => {
-            if (tooltip && chatPanel && !chatPanel.classList.contains('active') && !sessionStorage.getItem('aiTooltipDismissed')) {
+            if (tooltip && chatPanel && !chatPanel.classList.contains('active') && !tooltipDismissed) {
                 tooltip.classList.add('show');
             }
         }, 3500);
@@ -376,7 +378,7 @@ If you don't know the answer, politely redirect them to his contact details.`
                     return;
                 }
                 tooltip.classList.remove('show');
-                sessionStorage.setItem('aiTooltipDismissed', 'true');
+                tooltipDismissed = true;
                 chatPanel.classList.add('active');
                 chatPanel.classList.remove('minimized');
                 chatInput.focus();
@@ -388,13 +390,13 @@ If you don't know the answer, politely redirect them to his contact details.`
             tooltipClose.addEventListener('click', (e) => {
                 e.stopPropagation();
                 if (tooltip) tooltip.classList.remove('show');
-                sessionStorage.setItem('aiTooltipDismissed', 'true');
+                tooltipDismissed = true;
             });
         }
 
         floatBtn.addEventListener('click', () => {
             if (tooltip) tooltip.classList.remove('show');
-            sessionStorage.setItem('aiTooltipDismissed', 'true');
+            tooltipDismissed = true;
             chatPanel.classList.toggle('active');
             chatPanel.classList.remove('minimized');
             if (chatPanel.classList.contains('active')) {
