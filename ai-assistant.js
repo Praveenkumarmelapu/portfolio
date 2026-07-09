@@ -364,12 +364,12 @@ If you don't know the answer, politely redirect them to his contact details.`
 
         let tooltipDismissed = false;
 
-        // Show tooltip 3.5s after load if not dismissed
+        // Show tooltip immediately after load if not dismissed
         setTimeout(() => {
             if (tooltip && chatPanel && !chatPanel.classList.contains('active') && !tooltipDismissed) {
                 tooltip.classList.add('show');
             }
-        }, 3500);
+        }, 100);
 
         // Click tooltip to open chat
         if (tooltip) {
