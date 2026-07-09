@@ -292,6 +292,13 @@ If you don't know the answer, politely redirect them to his contact details.`
 
         container.innerHTML = `
             <div id="ai-assistant-container">
+                <!-- Attention Grabbing Tooltip -->
+                <div class="ai-tooltip" id="ai-tooltip">
+                    <button class="ai-tooltip-close" id="ai-tooltip-close" title="Close hint">&times;</button>
+                    <div class="ai-tooltip-text">👋 Ask me anything about Praveen!</div>
+                    <div class="ai-tooltip-arrow"></div>
+                </div>
+
                 <button class="ai-float-btn" id="ai-float-btn" title="Chat with AI Assistant">
                     <i class="fas fa-robot"></i>
                 </button>
@@ -352,8 +359,42 @@ If you don't know the answer, politely redirect them to his contact details.`
         const closeBtn = document.getElementById('ai-close-btn');
         const sendBtn = document.getElementById('ai-send-btn');
         const chatInput = document.getElementById('ai-chat-input');
+        const tooltip = document.getElementById('ai-tooltip');
+        const tooltipClose = document.getElementById('ai-tooltip-close');
+
+        // Show tooltip 3.5s after load if not dismissed
+        setTimeout(() => {
+            if (tooltip && chatPanel && !chatPanel.classList.contains('active') && !sessionStorage.getItem('aiTooltipDismissed')) {
+                tooltip.classList.add('show');
+            }
+        }, 3500);
+
+        // Click tooltip to open chat
+        if (tooltip) {
+            tooltip.addEventListener('click', (e) => {
+                if (e.target.classList.contains('ai-tooltip-close') || e.target.parentElement.classList.contains('ai-tooltip-close')) {
+                    return;
+                }
+                tooltip.classList.remove('show');
+                sessionStorage.setItem('aiTooltipDismissed', 'true');
+                chatPanel.classList.add('active');
+                chatPanel.classList.remove('minimized');
+                chatInput.focus();
+            });
+        }
+
+        // Tooltip close button
+        if (tooltipClose) {
+            tooltipClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (tooltip) tooltip.classList.remove('show');
+                sessionStorage.setItem('aiTooltipDismissed', 'true');
+            });
+        }
 
         floatBtn.addEventListener('click', () => {
+            if (tooltip) tooltip.classList.remove('show');
+            sessionStorage.setItem('aiTooltipDismissed', 'true');
             chatPanel.classList.toggle('active');
             chatPanel.classList.remove('minimized');
             if (chatPanel.classList.contains('active')) {
