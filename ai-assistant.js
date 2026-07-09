@@ -215,7 +215,7 @@ If you don't know the answer, politely redirect them to his contact details.`
             }
         ],
         "resume": {
-            "download_url": "https://drive.google.com/file/d/1qjC1v_y9fLAg6EHb6JYIofWNSvMm8jo9/view?usp=drive_link"
+            "download_url": "https://drive.google.com/file/d/1oXNE-U73fhozkWpNoHTS_vYXqbWj23Ed/view?usp=drive_link"
         },
         "contact": {
             "email": "praveenkumarmelapu418@gmail.com",
@@ -810,7 +810,7 @@ If you don't know the answer, politely redirect them to his contact details.`
             } else if (action === 'download') {
                 streamAssistantResponse("Downloading Praveen's resume...");
                 setTimeout(() => {
-                    window.open('https://drive.google.com/uc?export=download&id=1qjC1v_y9fLAg6EHb6JYIofWNSvMm8jo9', '_blank');
+                    window.open('https://drive.google.com/uc?export=download&id=1oXNE-U73fhozkWpNoHTS_vYXqbWj23Ed', '_blank');
                 }, 1000);
             }
         },
