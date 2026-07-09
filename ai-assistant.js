@@ -1441,7 +1441,7 @@ If you don't know the answer, politely redirect them to his contact details.`
         }
 
         // Project and Demo Links Matches
-        if (normalizedMsg === 'show me the demo links' || normalizedMsg === 'give me the demo links' || normalizedMsg === 'show me demo links' || normalizedMsg === 'give me demo links' || normalizedMsg === 'demo links' || normalizedMsg === 'live demo' || normalizedMsg === 'live demos' || normalizedMsg === 'project links' || normalizedMsg === 'links' || normalizedMsg === 'website links' || normalizedMsg === 'project link' || rawMsg.includes('live demo link') || rawMsg.includes('where is the demo') || rawMsg.includes('how to open demo') || rawMsg.includes('give me links') || rawMsg.includes('show me links') || rawMsg.includes('where are the links')) {
+        if (rawMsg.includes('demo link') || rawMsg.includes('demo links') || rawMsg.includes('live link') || rawMsg.includes('live links') || rawMsg.includes('project link') || rawMsg.includes('project links') || rawMsg.includes('website link') || rawMsg.includes('website links') || rawMsg.includes('show links') || rawMsg.includes('give links') || rawMsg.includes('where are the links') || rawMsg.includes('show me links') || rawMsg.includes('give me links') || normalizedMsg === 'links' || normalizedMsg === 'link' || normalizedMsg === 'demo' || normalizedMsg === 'demos') {
             lastIntent = 'projects';
             return `Here are the live demo and source code links for Praveen's projects:
             <br><br>
