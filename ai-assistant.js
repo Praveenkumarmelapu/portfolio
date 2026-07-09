@@ -1440,6 +1440,19 @@ If you don't know the answer, politely redirect them to his contact details.`
             return "Absolutely! You're always welcome to come back and continue exploring Praveen's portfolio. I'll be here whenever you need me.";
         }
 
+        // Project and Demo Links Matches
+        if (normalizedMsg === 'show me the demo links' || normalizedMsg === 'give me the demo links' || normalizedMsg === 'show me demo links' || normalizedMsg === 'give me demo links' || normalizedMsg === 'demo links' || normalizedMsg === 'live demo' || normalizedMsg === 'live demos' || normalizedMsg === 'project links' || normalizedMsg === 'links' || normalizedMsg === 'website links' || normalizedMsg === 'project link' || rawMsg.includes('live demo link') || rawMsg.includes('where is the demo') || rawMsg.includes('how to open demo') || rawMsg.includes('give me links') || rawMsg.includes('show me links') || rawMsg.includes('where are the links')) {
+            lastIntent = 'projects';
+            return `Here are the live demo and source code links for Praveen's projects:
+            <br><br>
+            • <strong>Restaurant POS System</strong>: <a href="https://quickserve-qr-order.vercel.app/" target="_blank">Live Demo</a> | <a href="https://github.com/Praveenkumarmelapu/Quickserver-QRcode-order-system-" target="_blank">GitHub Code</a>
+            <br>• <strong>Online Snacks Store</strong>: <a href="https://snackstore-frontend.onrender.com/" target="_blank">Live Demo</a> | <a href="https://github.com/Praveenkumarmelapu/online-store" target="_blank">GitHub Code</a>
+            <br>• <strong>Online Food Delivery App</strong>: <a href="https://praveenkumarmelapu.github.io/Food-Delivery-APP/" target="_blank">Live Demo</a> | <a href="https://github.com/Praveenkumarmelapu/Food-Delivery-APP/" target="_blank">GitHub Code</a>
+            <br>• <strong>To-Do List App</strong>: <a href="https://praveenkumarmelapu.github.io/To-Do-list-app/" target="_blank">Live Demo</a> | <a href="https://github.com/Praveenkumarmelapu/To-Do-list-app/" target="_blank">GitHub Code</a>
+            <br>• <strong>College Library Management System</strong>: (Internal/Local DB) | <a href="https://github.com/Praveenkumarmelapu/-College-Library-Management-System" target="_blank">GitHub Code</a>
+            <br>• <strong>Weather Web App</strong>: (Backend Service Only) | <a href="https://github.com/Praveenkumarmelapu/weather-app" target="_blank">GitHub Code</a>`;
+        }
+
         // --- SPECIFIC INTENT OVERRIDES (EXACT ANSWERS LIKE REAL LLM) ---
         if (rawMsg.includes('where is he from') || rawMsg.includes('where does he live') || rawMsg.includes('location') || rawMsg.includes('address') || rawMsg.includes('live in') || rawMsg.includes('based in')) {
             return `Praveen resides in the beautiful coastal city of **Visakhapatnam, Andhra Pradesh, India**. 📍`;
